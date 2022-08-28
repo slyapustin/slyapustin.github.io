@@ -1,43 +1,43 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0354b1b32ebaceb6940f36dc5600a2f3",
+    "revision": "93fbcc2388c4dfd23989f6aca115a9b4",
     "url": "/index.html"
   },
   {
-    "revision": "2a85b1df3025e7f1a31b",
+    "revision": "449b374d8452c88a6c11",
     "url": "/static/css/3.df879eac.chunk.css"
   },
   {
-    "revision": "cf228b1dd8482c2b2e47",
+    "revision": "a51d3f695664a7e80803",
     "url": "/static/css/4.e91a4b36.chunk.css"
   },
   {
-    "revision": "412e9011ce7ba4aed870",
+    "revision": "652bee463b46ba78e3c3",
     "url": "/static/css/main.1a6005f5.chunk.css"
   },
   {
-    "revision": "ce6fe1301dfc25059a77",
-    "url": "/static/js/2.e2cb7422.chunk.js"
+    "revision": "fe4445998bc6474ad9fb",
+    "url": "/static/js/2.d9491919.chunk.js"
   },
   {
     "revision": "6e1d2efc12a1ac972ff1f942df7eb0bd",
-    "url": "/static/js/2.e2cb7422.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.d9491919.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2a85b1df3025e7f1a31b",
-    "url": "/static/js/3.f2ea9122.chunk.js"
+    "revision": "449b374d8452c88a6c11",
+    "url": "/static/js/3.3c45951f.chunk.js"
   },
   {
-    "revision": "cf228b1dd8482c2b2e47",
-    "url": "/static/js/4.04d10283.chunk.js"
+    "revision": "a51d3f695664a7e80803",
+    "url": "/static/js/4.5f4fd94e.chunk.js"
   },
   {
-    "revision": "412e9011ce7ba4aed870",
-    "url": "/static/js/main.2a17f7b4.chunk.js"
+    "revision": "652bee463b46ba78e3c3",
+    "url": "/static/js/main.95df0b88.chunk.js"
   },
   {
-    "revision": "a923abeb3a0a96bc1794",
-    "url": "/static/js/runtime-main.57c641cb.js"
+    "revision": "d79355a504bffa0061b8",
+    "url": "/static/js/runtime-main.5490cf40.js"
   },
   {
     "revision": "21f233e19402cc4a66866a7f31191f0d",
@@ -58,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "59389695208d7454c6607bed51ed4316",
     "url": "/static/media/developerActivity.59389695.svg"
+  },
+  {
+    "revision": "9ad5cddaa698e29d4b887c57786e0015",
+    "url": "/static/media/foreside.9ad5cdda.jpeg"
   },
   {
     "revision": "35ef5e915631be2c31ccdff55b53db29",
