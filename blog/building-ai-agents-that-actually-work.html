@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Building AI Agents That Actually Work | Sergey Lyapustin</title>
+  <meta name="description" content="Lessons learned from shipping production AI agents — what the tutorials don't tell you about reliability, cost, and user trust.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building AI Agents That Actually Work">
+  <meta property="og:description" content="Lessons learned from shipping production AI agents — what the tutorials don't tell you about reliability, cost, and user trust.">
+  <meta property="og:url" content="https://slyapustin.com/blog/building-ai-agents-that-actually-work.html">
+  <meta name="theme-color" content="#0a0a0f"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKPLM8QC3P"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-VKPLM8QC3P")</script>
+<style>
+:root {
+  --accent: #7c6aef;
+  --accent-glow: #9d8fff;
+  --accent-dim: #4a3d8f;
+  --surface-0: #07070b;
+  --surface-1: #0e0e15;
+  --surface-2: #15151f;
+  --surface-3: #1c1c2a;
+  --border: #1e1e2e;
+  --border-subtle: #16161f;
+  --text-primary: #e8e6f0;
+  --text-secondary: #8b889a;
+  --text-tertiary: #5a576a;
+  --text-accent: #b0a4f8;
+  --radius: 12px;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'Geist Mono', 'SF Mono', monospace;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+[data-theme="light"] {
+  --surface-0: #f5f3f0;
+  --surface-1: #ebe8e3;
+  --surface-2: #e2dfd9;
+  --surface-3: #d8d5ce;
+  --border: #d4d0c8;
+  --border-subtle: #e0ddd6;
+  --text-primary: #1a1820;
+  --text-secondary: #6b6878;
+  --text-tertiary: #9e9baa;
+  --text-accent: #5b4bc7;
+  --accent: #5b4bc7;
+  --accent-glow: #7c6aef;
+  --accent-dim: #d4cff5;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--surface-0); color: var(--text-primary); line-height: 1.6; }
+::selection { background: var(--accent); color: #fff; }
+a { color: var(--text-accent); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--accent-glow); }
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px;
+  display: flex; align-items: center; padding: 0 clamp(1.5rem, 4vw, 3rem);
+  background: color-mix(in srgb, var(--surface-0) 80%, transparent);
+  backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: 0 1px 0 var(--border-subtle);
+}
+.nav-inner { max-width: 720px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: var(--font-display); font-size: 1.35rem; color: var(--text-primary); }
+.nav-logo em { font-style: italic; color: var(--accent); }
+.nav-back { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+.nav-back:hover { color: var(--text-primary); }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); color: var(--text-secondary);
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s, transform .2s; font-size: 1rem;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--text-primary); transform: rotate(30deg); }
+
+.article { max-width: 720px; margin: 0 auto; padding: calc(64px + 3rem) clamp(1.5rem, 4vw, 3rem) 4rem; }
+.article-date { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 1rem; }
+.article-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+.article-title em { font-style: italic; color: var(--accent); }
+.article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
+
+.article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
+.article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
+.article-body p strong { color: var(--text-primary); font-weight: 500; }
+.article-body ul, .article-body ol { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; padding-left: 1.5rem; }
+.article-body li { margin-bottom: 0.5rem; }
+.article-body blockquote { border-left: 3px solid var(--accent-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--surface-1); border-radius: 0 var(--radius) var(--radius) 0; }
+.article-body blockquote p { color: var(--text-secondary); margin-bottom: 0; font-style: italic; }
+.article-body code { font-family: var(--font-mono); font-size: 0.88em; background: var(--surface-2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); }
+.article-body pre { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+.article-body pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.7; }
+.article-body hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+.article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.article-footer a { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+.article-footer a:hover { color: var(--text-primary); }
+
+@media (max-width: 640px) { .article-title { font-size: 1.8rem; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Sergey <em>Lyapustin</em></a>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="/#blog" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All posts
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <div class="article-date">March 15, 2026</div>
+  <h1 class="article-title">Building AI Agents That <em>Actually Work</em></h1>
+  <div class="article-tags">
+    <span class="article-tag">AI Agents</span>
+    <span class="article-tag">LLMs</span>
+    <span class="article-tag">Production</span>
+  </div>
+
+  <div class="article-body">
+    <p>
+      Everyone is building AI agents right now. The demos look incredible — an agent that books your flights, writes your code, manages your calendar. But there's a canyon between a demo that works 80% of the time and a production system that works 99% of the time. <strong>That last 19% is where the real engineering happens.</strong>
+    </p>
+
+    <p>
+      I've spent the past year shipping AI agents into production environments — not toy projects, but systems handling real conversations, real data, and real money. Here's what I've learned about making them actually work.
+    </p>
+
+    <h2>The reliability illusion</h2>
+
+    <p>
+      The first thing you discover when building agents is that <strong>LLMs are probabilistic, but your users expect deterministic behavior</strong>. A customer service agent that occasionally hallucinates a refund policy doesn't just look bad — it creates legal liability.
+    </p>
+
+    <p>
+      The solution isn't to make the LLM more reliable (you can't, fundamentally). It's to design your system so that unreliability is contained and correctable:
+    </p>
+
+    <ul>
+      <li><strong>Constrain the action space.</strong> Don't let your agent do anything — give it a specific set of tools with well-defined inputs and outputs. Every action should be reversible or require confirmation.</li>
+      <li><strong>Validate before executing.</strong> The agent proposes, the system disposes. Check every tool call against business rules before running it.</li>
+      <li><strong>Build escape hatches.</strong> When the agent isn't confident (and you can measure this), gracefully hand off to a human. The best agent systems are human-AI hybrids, not full automation.</li>
+    </ul>
+
+    <h2>Cost is a feature, not an afterthought</h2>
+
+    <p>
+      Here's something the tutorials never mention: <strong>a naive agent loop can cost $2-5 per conversation</strong>. At scale, that's catastrophic. I've seen teams build brilliant agents and then realize they can't afford to run them.
+    </p>
+
+    <p>
+      Practical strategies that cut our costs by 80%:
+    </p>
+
+    <ul>
+      <li><strong>Route by complexity.</strong> Not every query needs your most powerful model. Use a small, fast classifier to route simple questions to cheaper models and only escalate to the big guns when needed.</li>
+      <li><strong>Cache aggressively.</strong> Semantic caching (not just exact-match) can handle 30-40% of queries without touching an LLM at all.</li>
+      <li><strong>Minimize context.</strong> Every token in your prompt costs money. Be ruthless about what goes into the context window. Summarize conversation history instead of passing raw transcripts.</li>
+    </ul>
+
+    <h2>Trust is earned in milliseconds</h2>
+
+    <p>
+      Users form their opinion of an AI agent in the first 2-3 interactions. If it fumbles early, they won't give it another chance — they'll just email support. This means your agent needs to be <strong>most reliable on the most common queries</strong>, not the edge cases.
+    </p>
+
+    <blockquote>
+      <p>The best AI agent I've built handles 70% of cases flawlessly, 20% adequately, and routes the remaining 10% to humans. The worst AI agent I've seen tries to handle 100% of cases and fails unpredictably.</p>
+    </blockquote>
+
+    <p>
+      Invest heavily in the happy path. Profile your actual query distribution and optimize for the top 20 intents. Those will cover 80%+ of your traffic.
+    </p>
+
+    <h2>The architecture that works</h2>
+
+    <p>
+      After iterating through several architectures, here's the pattern that has worked best for production agents:
+    </p>
+
+    <ol>
+      <li><strong>Intent classifier</strong> — lightweight model that categorizes the request and decides the routing strategy</li>
+      <li><strong>Context assembler</strong> — pulls relevant data from your knowledge base, user history, and business rules</li>
+      <li><strong>Agent core</strong> — the LLM with tools, operating within a constrained action space specific to the classified intent</li>
+      <li><strong>Validator</strong> — checks the agent's proposed actions against business rules before execution</li>
+      <li><strong>Observer</strong> — logs everything, tracks confidence scores, and triggers human escalation when needed</li>
+    </ol>
+
+    <p>
+      This is more complex than "just call the API," but it's the difference between a demo and a system.
+    </p>
+
+    <h2>Monitoring is your safety net</h2>
+
+    <p>
+      You cannot ship an AI agent without comprehensive monitoring. Not just "is it up" monitoring — you need to track:
+    </p>
+
+    <ul>
+      <li><strong>Conversation quality scores</strong> — automated evaluation of every interaction</li>
+      <li><strong>Tool call success rates</strong> — which tools are failing and why</li>
+      <li><strong>Cost per conversation</strong> — broken down by intent category</li>
+      <li><strong>Escalation rate</strong> — how often the agent gives up</li>
+      <li><strong>User satisfaction signals</strong> — did the user achieve their goal?</li>
+    </ul>
+
+    <p>
+      Set up alerts on all of these. When your agent starts drifting (and it will — model updates, data distribution shifts, new edge cases), you want to catch it before your users do.
+    </p>
+
+    <hr>
+
+    <p>
+      Building production AI agents is hard, unglamorous engineering work. It's not about picking the right model or writing the perfect prompt — it's about building robust systems around fundamentally unpredictable components. <strong>The teams that succeed are the ones that treat AI as a component in a larger system, not as the system itself.</strong>
+    </p>
+
+    <p>
+      If you're building agents and hitting these same walls, I'd love to compare notes. The field is moving fast, but the engineering principles are timeless.
+    </p>
+  </div>
+
+  <div class="article-footer">
+    <a href="/#blog">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to all posts
+    </a>
+    <a href="/blog/rag-is-not-enough.html">
+      Next post
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</article>
+
+<script>
+(function() {
+  const themeToggle = document.getElementById('themeToggle');
+  const moonIcon = themeToggle.querySelector('.icon-moon');
+  const sunIcon = themeToggle.querySelector('.icon-sun');
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    moonIcon.style.display = theme === 'light' ? 'none' : 'block';
+    sunIcon.style.display = theme === 'light' ? 'block' : 'none';
+  }
+  const saved = localStorage.getItem('theme');
+  if (saved) { setTheme(saved); }
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
+  themeToggle.addEventListener('click', () => {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>

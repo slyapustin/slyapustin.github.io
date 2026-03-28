@@ -24,9 +24,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKPLM8QC3P"></script>
   <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-VKPLM8QC3P")</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 
 <style>
 /* ═══════════════════════════════════════════════════════
@@ -54,9 +51,9 @@
   --radius-sm: 8px;
   --nav-height: 64px;
   --max-width: 1120px;
-  --font-display: 'Instrument Serif', Georgia, serif;
-  --font-mono: 'Geist Mono', 'SF Mono', monospace;
-  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
 }
 
 [data-theme="light"] {
@@ -69,11 +66,12 @@
   --border-subtle: #e0ddd6;
   --text-primary: #1a1820;
   --text-secondary: #6b6878;
-  --text-tertiary: #9e9baa;
+  --text-tertiary: #656278;
   --text-accent: #5b4bc7;
   --accent: #5b4bc7;
   --accent-glow: #7c6aef;
   --accent-dim: #d4cff5;
+  --green: #1a7a3a;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -146,7 +144,7 @@ a:hover { color: var(--accent-glow); }
   color: var(--text-primary);
   letter-spacing: -0.01em;
 }
-.nav-logo em { font-style: italic; color: var(--accent); }
+.nav-logo em { font-style: normal; font-weight: 600; color: var(--accent); }
 
 .nav-links {
   display: flex;
@@ -287,25 +285,21 @@ a:hover { color: var(--accent-glow); }
   height: 6px;
   border-radius: 50%;
   background: var(--green);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
+  flex-shrink: 0;
 }
 
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 5rem);
   line-height: 1.05;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 300;
+  letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
 }
 
 .hero-title em {
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
   color: var(--accent);
 }
 
@@ -740,6 +734,178 @@ a:hover { color: var(--accent-glow); }
 .project-stat.stars svg { color: var(--star-color); }
 
 /* ═══════════════════════════════════════════════════════
+   WHAT I DO
+   ═══════════════════════════════════════════════════════ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.service-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: border-color .3s, transform .3s;
+}
+
+.service-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+.service-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface-2));
+  border: 1px solid var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.service-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.service-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NOW
+   ═══════════════════════════════════════════════════════ */
+.now-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.now-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 10px 18px;
+  border-radius: 100px;
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  transition: border-color .2s, color .2s;
+}
+
+.now-item:hover {
+  border-color: var(--accent-dim);
+  color: var(--text-primary);
+}
+
+.now-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BLOG
+   ═══════════════════════════════════════════════════════ */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.blog-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px color-mix(in srgb, var(--accent) 6%, transparent);
+  color: inherit;
+}
+
+.blog-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.blog-card-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.blog-card-excerpt {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.blog-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 0.5rem;
+}
+
+.blog-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-subtle);
+}
+
+.blog-card-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-accent);
+  padding-top: 0.5rem;
+  transition: gap .2s;
+}
+
+.blog-card:hover .blog-card-read { gap: 10px; }
+
+.blog-card-read svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ═══════════════════════════════════════════════════════
    CONTACT
    ═══════════════════════════════════════════════════════ */
 .contact-box {
@@ -766,6 +932,7 @@ a:hover { color: var(--accent-glow); }
   background: var(--accent);
   filter: blur(100px);
   opacity: 0.06;
+  pointer-events: none;
 }
 
 .contact-title {
@@ -929,11 +1096,11 @@ a:hover { color: var(--accent-glow); }
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Sergey <em>L.</em></a>
+    <a href="#" class="nav-logo">Sergey <em>Lyapustin</em></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#stack">Stack</a></li>
+      <li><a href="#services">What I Do</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:0.75rem;">
@@ -955,10 +1122,8 @@ a:hover { color: var(--accent-glow); }
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badge">Let's talk AI</div>
-      <h1 class="hero-title">Sergey <em>Lyapustin</em></h1>
-      <p class="hero-subtitle">
-        <strong>AI Architect</strong> &amp; Senior Software Engineer.
-        Language-agnostic, goal-focused. Designing intelligent systems and AI-powered applications that deliver real-world results.
+      <p class="hero-subtitle" style="font-size:clamp(1.3rem,2.5vw,1.6rem);max-width:620px;">
+        <strong>AI Architect</strong> with 15+ years in software engineering. Language-agnostic, goal-focused. I design intelligent systems, lead engineering teams, and bridge the gap between AI research and production. From conversation intelligence to agent architectures &mdash; I turn complex AI into real-world products.
       </p>
       <div class="hero-meta">
         <span class="hero-meta-item">
@@ -1072,13 +1237,123 @@ a:hover { color: var(--accent-glow); }
 
 <hr class="divider">
 
+<!-- ═══ WHAT I DO ═══ -->
+<section class="section" id="services">
+  <div class="section-inner">
+    <div class="section-label reveal">What I Do</div>
+    <h2 class="section-title reveal reveal-delay-1">Focus areas</h2>
+    <p class="section-desc reveal reveal-delay-2">Where I bring the most value.</p>
+    <div class="services-grid reveal reveal-delay-3">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.92L12 22"/><path d="M12 2a4 4 0 0 0-4 4c0 1.95 1.4 3.57 3.25 3.92"/><circle cx="12" cy="14" r="2"/><path d="M4.5 14.5L8 13"/><path d="M19.5 14.5L16 13"/></svg>
+        </div>
+        <div class="service-title">AI Agent Architecture</div>
+        <div class="service-desc">Designing and building production-grade AI agents — from conversation flows and tool orchestration to reliability, cost optimization, and human-in-the-loop patterns.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg>
+        </div>
+        <div class="service-title">Conversation Intelligence</div>
+        <div class="service-desc">Building systems that understand, analyze, and act on conversations at scale. Real-time transcription, intent detection, sentiment analysis, and actionable insights from voice and text.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8l3 3-3 3"/><path d="M13 14h4"/></svg>
+        </div>
+        <div class="service-title">LLM Integration</div>
+        <div class="service-desc">Integrating large language models into existing products and workflows. RAG pipelines, prompt engineering, fine-tuning strategies, and MCP server development for tool connectivity.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ NOW ═══ -->
+<section class="section" id="now">
+  <div class="section-inner">
+    <div class="section-label reveal">Now</div>
+    <h2 class="section-title reveal reveal-delay-1">Currently exploring</h2>
+    <div class="now-grid reveal reveal-delay-2">
+      <span class="now-item"><span class="now-dot"></span>MCP Servers</span>
+      <span class="now-item"><span class="now-dot"></span>vCon Standards</span>
+      <span class="now-item"><span class="now-dot"></span>AI Agent Frameworks</span>
+      <span class="now-item"><span class="now-dot"></span>Conversation Intelligence</span>
+      <span class="now-item"><span class="now-dot"></span>Supabase + pgvector</span>
+      <span class="now-item"><span class="now-dot"></span>Claude API & Tool Use</span>
+      <span class="now-item"><span class="now-dot"></span>Enterprise AI Adoption</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
 <!-- ═══ PROJECTS ═══ -->
 <section class="section" id="projects">
   <div class="section-inner">
     <div class="section-label reveal">Open Source</div>
-    <h2 class="section-title reveal reveal-delay-1">Pinned projects</h2>
-    <p class="section-desc reveal reveal-delay-2">Selected repositories I've built and maintain.</p>
+    <h2 class="section-title reveal reveal-delay-1">Projects</h2>
+    <p class="section-desc reveal reveal-delay-2">Selected repositories — from AI tooling to battle-tested Django libraries.</p>
     <div class="projects-grid">
+
+      <a href="https://github.com/slyapustin/datadog-mcp" target="_blank" rel="noopener" class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.92L12 22"/><path d="M12 2a4 4 0 0 0-4 4c0 1.95 1.4 3.57 3.25 3.92"/><circle cx="12" cy="14" r="2"/></svg>
+          </div>
+          <span class="project-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <div class="project-name">datadog-mcp</div>
+        <div class="project-desc">MCP Server for Datadog &mdash; comprehensive monitoring and observability tools via Model Context Protocol.</div>
+        <div class="project-footer">
+          <span class="project-lang"><span class="project-lang-dot"></span>Python</span>
+          <span class="project-stat" style="color:var(--text-accent);font-size:0.7rem;">MCP</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/slyapustin/MCP-Salesforce" target="_blank" rel="noopener" class="project-card reveal reveal-delay-1">
+        <div class="project-header">
+          <div class="project-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="project-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <div class="project-name">MCP-Salesforce</div>
+        <div class="project-desc">MCP connector for Salesforce &mdash; enabling AI agents to interact with CRM data through the Model Context Protocol.</div>
+        <div class="project-footer">
+          <span class="project-lang"><span class="project-lang-dot"></span>Python</span>
+          <span class="project-stat stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            1
+          </span>
+        </div>
+      </a>
+
+      <a href="https://github.com/slyapustin/fixly" target="_blank" rel="noopener" class="project-card reveal reveal-delay-2">
+        <div class="project-header">
+          <div class="project-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <span class="project-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <div class="project-name">fixly</div>
+        <div class="project-desc">AI-powered text fixer Chrome extension &mdash; grammar, tone, and style corrections using LLMs.</div>
+        <div class="project-footer">
+          <span class="project-lang"><span class="project-lang-dot" style="background:#f1e05a"></span>JavaScript</span>
+          <span class="project-stat stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            1
+          </span>
+        </div>
+      </a>
 
       <a href="https://github.com/slyapustin/django-classified" target="_blank" rel="noopener" class="project-card reveal">
         <div class="project-header">
@@ -1090,7 +1365,7 @@ a:hover { color: var(--accent-glow); }
           </span>
         </div>
         <div class="project-name">django-classified</div>
-        <div class="project-desc">Django Classified &mdash; a full-featured classified ads application built with Django.</div>
+        <div class="project-desc">Full-featured classified ads application built with Django. One of the most starred Django classifieds projects.</div>
         <div class="project-footer">
           <span class="project-lang"><span class="project-lang-dot"></span>Python</span>
           <span class="project-stat stars">
@@ -1114,7 +1389,7 @@ a:hover { color: var(--accent-glow); }
           </span>
         </div>
         <div class="project-name">django-chatbot</div>
-        <div class="project-desc">Real-time chatbot with Celery, Django Channels (WebSocket) deployed on Heroku.</div>
+        <div class="project-desc">Real-time chatbot with Celery, Django Channels (WebSocket) &mdash; the foundation for conversational systems.</div>
         <div class="project-footer">
           <span class="project-lang"><span class="project-lang-dot"></span>Python</span>
           <span class="project-stat stars">
@@ -1152,76 +1427,99 @@ a:hover { color: var(--accent-glow); }
         </div>
       </a>
 
-      <a href="https://github.com/slyapustin/kubernetes-django-app" target="_blank" rel="noopener" class="project-card reveal">
-        <div class="project-header">
-          <div class="project-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/><polyline points="2 15.5 12 8.5 22 15.5"/><line x1="12" y1="2" x2="12" y2="8.5"/></svg>
-          </div>
-          <span class="project-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ BLOG ═══ -->
+<section class="section" id="blog">
+  <div class="section-inner">
+    <div class="section-label reveal">Blog</div>
+    <h2 class="section-title reveal reveal-delay-1">Thoughts &amp; writing</h2>
+    <p class="section-desc reveal reveal-delay-2">Notes on AI, engineering, and building things that matter.</p>
+    <div class="blog-grid" id="blogGrid">
+
+      <a href="/blog/supabase-for-ai-agents.html" class="blog-card reveal">
+        <span class="blog-card-date">Mar 2026 &middot; 8 min read</span>
+        <h3 class="blog-card-title">Supabase: The Database AI Agents Deserve</h3>
+        <p class="blog-card-excerpt">Why Supabase is quietly becoming the best database platform for AI agent applications — real-time, vectors, auth, and edge functions in one stack.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">Supabase</span>
+          <span class="blog-card-tag">AI Agents</span>
+          <span class="blog-card-tag">Database</span>
         </div>
-        <div class="project-name">kubernetes-django-app</div>
-        <div class="project-desc">Sample Django application containerized and deployed with Kubernetes.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="project-lang-dot"></span>Python</span>
-          <span class="project-stat stars">
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            6
-          </span>
-          <span class="project-stat">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
-            8
-          </span>
-        </div>
+        <span class="blog-card-read">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </a>
 
-      <a href="https://github.com/slyapustin/async-django" target="_blank" rel="noopener" class="project-card reveal reveal-delay-1">
-        <div class="project-header">
-          <div class="project-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <span class="project-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </span>
+      <a href="/blog/building-ai-agents-that-actually-work.html" class="blog-card reveal reveal-delay-1">
+        <span class="blog-card-date">Mar 2026 &middot; 6 min read</span>
+        <h3 class="blog-card-title">Building AI Agents That Actually Work</h3>
+        <p class="blog-card-excerpt">Lessons learned from shipping production AI agents — what the tutorials don't tell you about reliability, cost, and user trust.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">AI Agents</span>
+          <span class="blog-card-tag">LLMs</span>
+          <span class="blog-card-tag">Production</span>
         </div>
-        <div class="project-name">async-django</div>
-        <div class="project-desc">Django async application demonstrating ASGI capabilities, deployed on Heroku.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="project-lang-dot"></span>Python</span>
-          <span class="project-stat stars">
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            6
-          </span>
-          <span class="project-stat">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
-            1
-          </span>
-        </div>
+        <span class="blog-card-read">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </a>
 
-      <a href="https://github.com/slyapustin/airflow-on-heroku" target="_blank" rel="noopener" class="project-card reveal reveal-delay-2">
-        <div class="project-header">
-          <div class="project-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <span class="project-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </span>
+      <a href="/blog/rag-is-not-enough.html" class="blog-card reveal reveal-delay-2">
+        <span class="blog-card-date">Feb 2026 &middot; 7 min read</span>
+        <h3 class="blog-card-title">RAG Is Not Enough: When to Go Beyond Retrieval</h3>
+        <p class="blog-card-excerpt">RAG got us far, but some problems need more. Exploring fine-tuning, tool use, and hybrid approaches for complex AI systems.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">RAG</span>
+          <span class="blog-card-tag">Architecture</span>
         </div>
-        <div class="project-name">airflow-on-heroku</div>
-        <div class="project-desc">Apache Airflow demo environment configured and running on Heroku.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="project-lang-dot" style="background:#3B2F63"></span>Procfile</span>
-          <span class="project-stat stars">
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            13
-          </span>
-          <span class="project-stat">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
-            7
-          </span>
+        <span class="blog-card-read">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a href="/blog/the-language-agnostic-engineer.html" class="blog-card reveal">
+        <span class="blog-card-date">Jan 2026 &middot; 5 min read</span>
+        <h3 class="blog-card-title">The Language-Agnostic Engineer</h3>
+        <p class="blog-card-excerpt">Why I stopped identifying with a single programming language and started focusing on outcomes. A case for tools over tribes.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">Career</span>
+          <span class="blog-card-tag">Engineering</span>
         </div>
+        <span class="blog-card-read">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a href="https://itnext.io/how-i-build-my-own-amazon-s3-storage-5de56b4c6612" target="_blank" rel="noopener" class="blog-card reveal">
+        <span class="blog-card-date">Aug 2019</span>
+        <h3 class="blog-card-title">How I Built My Own Amazon S3 Storage</h3>
+        <p class="blog-card-excerpt">A deep dive into building a self-hosted S3-compatible storage solution with Django and MinIO.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">Django</span>
+          <span class="blog-card-tag">S3</span>
+          <span class="blog-card-tag">Infrastructure</span>
+        </div>
+        <span class="blog-card-read">Read on Medium <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+      </a>
+
+      <a href="https://medium.com/@s.lyapustin/heroku-chatbot-with-celery-websockets-and-redis-340ffc491f82" target="_blank" rel="noopener" class="blog-card reveal reveal-delay-1">
+        <span class="blog-card-date">Jul 2019</span>
+        <h3 class="blog-card-title">Heroku Chatbot with Celery, WebSockets, and Redis</h3>
+        <p class="blog-card-excerpt">Building a real-time chatbot using Django Channels, Celery for async tasks, and Redis as the message broker.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">Django</span>
+          <span class="blog-card-tag">WebSockets</span>
+          <span class="blog-card-tag">Redis</span>
+        </div>
+        <span class="blog-card-read">Read on Medium <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+      </a>
+
+      <a href="https://medium.com/@s.lyapustin/django-polls-app-with-elasticsearch-ffc02b9e5d36" target="_blank" rel="noopener" class="blog-card reveal reveal-delay-2">
+        <span class="blog-card-date">Nov 2018</span>
+        <h3 class="blog-card-title">Django Polls App with Elasticsearch</h3>
+        <p class="blog-card-excerpt">Adding powerful full-text search to a Django application using Elasticsearch and django-elasticsearch-dsl.</p>
+        <div class="blog-card-tags">
+          <span class="blog-card-tag">Django</span>
+          <span class="blog-card-tag">Elasticsearch</span>
+        </div>
+        <span class="blog-card-read">Read on Medium <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       </a>
 
     </div>
@@ -1310,7 +1608,11 @@ a:hover { color: var(--accent-glow); }
   }
 
   const saved = localStorage.getItem('theme');
-  if (saved) setTheme(saved);
+  if (saved) {
+    setTheme(saved);
+  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+    setTheme('light');
+  }
 
   themeToggle.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
