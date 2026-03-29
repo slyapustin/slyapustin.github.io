@@ -5,8 +5,17 @@
     <link>https://slyapustin.com</link>
     <description>Notes on AI, engineering, and building things that matter. AI agent architecture, conversation intelligence, and LLM integration.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://slyapustin.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>When Building Is the Easy Part: The New Role of the Engineer</title>
+      <link>https://slyapustin.com/blog/gtm-is-the-new-moat.html</link>
+      <guid>https://slyapustin.com/blog/gtm-is-the-new-moat.html</guid>
+      <pubDate>Sat, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>AI collapsed the cost of building software. When anyone can ship a product in a weekend, what does that mean for engineers? The value is shifting from implementation to strategy, domain expertise, and distribution.</description>
+    </item>
 
     <item>
       <title>Supabase: The Database AI Agents Deserve</title>
