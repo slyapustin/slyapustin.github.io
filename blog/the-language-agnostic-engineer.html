@@ -33,7 +33,7 @@
 [data-theme="light"] {
   --surface-0: #f5f3f0; --surface-1: #ebe8e3; --surface-2: #e2dfd9; --surface-3: #d8d5ce;
   --border: #d4d0c8; --border-subtle: #e0ddd6;
-  --text-primary: #1a1820; --text-secondary: #6b6878; --text-tertiary: #656278; --text-accent: #5b4bc7;
+  --text-primary: #1a1820; --text-secondary: #5e5b6a; --text-tertiary: #5a5770; --text-accent: #5b4bc7;
   --accent: #5b4bc7; --accent-glow: #7c6aef; --accent-dim: #d4cff5;
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,13 +58,14 @@ a:hover { color: var(--accent-glow); }
 .article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
 .article-body ul, .article-body ol { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; padding-left: 1.5rem; }
 .article-body li { margin-bottom: 0.5rem; }
 .article-body blockquote { border-left: 3px solid var(--accent-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--surface-1); border-radius: 0 var(--radius) var(--radius) 0; }
 .article-body blockquote p { color: var(--text-secondary); margin-bottom: 0; font-style: italic; }
-.article-body code { font-family: var(--font-mono); font-size: 0.88em; background: var(--surface-2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); }
+.article-body code { color: var(--text-primary); font-family: var(--font-mono); font-size: 0.88em; background: var(--surface-2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); }
 .article-body hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 .article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .article-footer a { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
@@ -91,7 +92,7 @@ a:hover { color: var(--accent-glow); }
   </div>
 </nav>
 
-<article class="article">
+<main><article class="article">
   <div class="article-date">January 22, 2026</div>
   <h1 class="article-title">The <em>Language-Agnostic</em> Engineer</h1>
   <div class="article-tags">
@@ -223,7 +224,7 @@ a:hover { color: var(--accent-glow); }
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
-</article>
+</article></main>
 
 <script>
 (function() {
