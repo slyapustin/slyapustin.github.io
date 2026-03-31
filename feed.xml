@@ -5,8 +5,17 @@
     <link>https://slyapustin.com</link>
     <description>Notes on AI, engineering, and building things that matter. AI agent architecture, conversation intelligence, and LLM integration.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://slyapustin.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CLAUDE_CODE_NO_FLICKER: The Fix a Year in the Making</title>
+      <link>https://slyapustin.com/blog/claude-code-no-flicker.html</link>
+      <guid>https://slyapustin.com/blog/claude-code-no-flicker.html</guid>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Claude Code's terminal flickering was the most upvoted issue for over a year. Anthropic finally shipped CLAUDE_CODE_NO_FLICKER - here's the full story, what it does, and how to enable it.</description>
+    </item>
 
     <item>
       <title>When Building Is the Easy Part: The New Role of the Engineer</title>

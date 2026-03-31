@@ -14,6 +14,7 @@
 
 ## Blog Posts
 
+- [CLAUDE_CODE_NO_FLICKER: The Fix a Year in the Making](https://slyapustin.com/blog/claude-code-no-flicker.html): Claude Code's terminal flickering was the most upvoted issue for over a year. How to enable the fix, what it does under the hood, and why it took so long.
 - [When Building Is the Easy Part: The New Role of the Engineer](https://slyapustin.com/blog/when-building-is-the-easy-part.html): AI collapsed the cost of building software. The value is shifting from implementation to strategy, domain expertise, and distribution.
 - [Supabase: The Database AI Agents Deserve](https://slyapustin.com/blog/supabase-db-for-ai-agents.html): Why Supabase is the best database platform for AI agent applications — pgvector, real-time, RLS as guardrails, Edge Functions as agent tools.
 - [Building AI Agents That Actually Work](https://slyapustin.com/blog/building-ai-agents-that-actually-work.html): Lessons from shipping production AI agents — reliability, cost optimization, trust, and monitoring.
