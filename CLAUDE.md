@@ -31,6 +31,12 @@ Every new blog post MUST include before deploying:
 - Adjacent blog posts — update prev/next navigation links
 - `llms.txt` — add post to blog list
 
+### Heading anchors (all h2/h3 in article-body):
+- Every `<h2>` and `<h3>` must have a slug `id` attribute (e.g. `id="mcp-shift"`)
+- Append a chain-link SVG anchor icon: `<a href="#slug" class="anchor-icon" aria-label="Link to section"><svg ...></a>`
+- CSS: anchor icon hidden by default, visible on hover, `scroll-margin-top` for fixed nav offset
+- JS: clicking the heading text updates the URL hash via `history.replaceState`
+
 ### Quality checks:
 - Lighthouse audit must score 100 on SEO, Accessibility, Best Practices
 - SVG diagrams must work in light mode (add CSS overrides for hardcoded dark colors)

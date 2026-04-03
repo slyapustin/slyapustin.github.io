@@ -58,6 +58,9 @@ a:hover { color: var(--accent-glow); }
 .article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
 .article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
@@ -111,7 +114,7 @@ a:hover { color: var(--accent-glow); }
       After building several RAG systems and watching them struggle with certain problem types, I've developed a framework for deciding when RAG is enough and when you need to reach for something more powerful.
     </p>
 
-    <h2>Where RAG shines</h2>
+    <h2 id="where-rag-shines">Where RAG shines<a href="#where-rag-shines" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Let's start with what RAG does well. It's genuinely excellent for:
@@ -128,9 +131,9 @@ a:hover { color: var(--accent-glow); }
       If your problem fits these patterns, RAG is probably the right call. Don't over-engineer it.
     </p>
 
-    <h2>The five signs RAG isn't enough</h2>
+    <h2 id="the-five-signs-rag-isnt-enough">The five signs RAG isn't enough<a href="#the-five-signs-rag-isnt-enough" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
-    <h3>1. Your queries require reasoning across multiple documents</h3>
+    <h3 id="your-queries-require-reasoning-across-multiple-documents">1. Your queries require reasoning across multiple documents<a href="#your-queries-require-reasoning-across-multiple-documents" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       RAG retrieves chunks and asks the LLM to synthesize. But what if the answer requires <strong>comparing information across 15 different documents</strong>, understanding temporal relationships, or resolving contradictions? The context window fills up fast, and the LLM's attention degrades.
@@ -140,31 +143,31 @@ a:hover { color: var(--accent-glow); }
       I hit this wall building a system that needed to analyze compliance across regulatory documents. The answer wasn't in any single chunk — it emerged from the relationships between dozens of clauses across different regulations.
     </p>
 
-    <h3>2. You need structured output with high precision</h3>
+    <h3 id="you-need-structured-output-with-high-precision">2. You need structured output with high precision<a href="#you-need-structured-output-with-high-precision" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       RAG gives you text in, text out. But if you need the system to <strong>reliably extract structured data</strong> — populate a form, generate a JSON object with specific fields, classify into exact categories — the retrieve-then-generate pattern often produces inconsistent results.
     </p>
 
-    <h3>3. Your domain has specialized language</h3>
+    <h3 id="your-domain-has-specialized-language">3. Your domain has specialized language<a href="#your-domain-has-specialized-language" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       General-purpose embeddings work surprisingly well for most domains. But when your field has <strong>highly specialized terminology</strong> where the same word means completely different things in different contexts, off-the-shelf embeddings will retrieve the wrong chunks. Medical, legal, and financial domains hit this constantly.
     </p>
 
-    <h3>4. The task requires multi-step workflows</h3>
+    <h3 id="the-task-requires-multi-step-workflows">4. The task requires multi-step workflows<a href="#the-task-requires-multi-step-workflows" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       "Look up this information and return it" is RAG's sweet spot. <strong>"Look up this information, then use it to make a decision, then take an action based on that decision"</strong> — that's an agent problem, not a retrieval problem.
     </p>
 
-    <h3>5. Latency matters more than accuracy</h3>
+    <h3 id="latency-matters-more-than-accuracy">5. Latency matters more than accuracy<a href="#latency-matters-more-than-accuracy" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       RAG adds latency — embedding the query, searching the vector store, fetching chunks, then running the LLM with an extended context. If you need <strong>sub-second responses</strong> and the answer space is well-defined, a fine-tuned smaller model might serve you better.
     </p>
 
-    <h2>The alternatives and when to use them</h2>
+    <h2 id="the-alternatives-and-when-to-use-them">The alternatives and when to use them<a href="#the-alternatives-and-when-to-use-them" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       When RAG falls short, here's my decision tree:
@@ -177,7 +180,7 @@ a:hover { color: var(--accent-glow); }
       <li><strong>Hybrid approaches</strong> — often the answer is combining techniques. Fine-tune a model for your domain, give it RAG for current data, and tools for actions.</li>
     </ul>
 
-    <h2>A practical hybrid architecture</h2>
+    <h2 id="a-practical-hybrid-architecture">A practical hybrid architecture<a href="#a-practical-hybrid-architecture" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       The most successful system I've built recently uses what I call a <strong>"layered intelligence" approach</strong>:
@@ -198,7 +201,7 @@ a:hover { color: var(--accent-glow); }
       <p>The best AI architecture isn't the most sophisticated one — it's the one that uses the minimum complexity needed for each specific query.</p>
     </blockquote>
 
-    <h2>The embedding problem nobody talks about</h2>
+    <h2 id="the-embedding-problem-nobody-talks-about">The embedding problem nobody talks about<a href="#the-embedding-problem-nobody-talks-about" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       One thing I want to flag: <strong>your retrieval is only as good as your embeddings and chunking strategy</strong>. I've seen teams spend weeks tuning their LLM prompts when the real problem was that their chunking was splitting critical information across chunks, or their embeddings were losing domain-specific nuance.
@@ -255,6 +258,13 @@ a:hover { color: var(--accent-glow); }
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 })();
 </script>

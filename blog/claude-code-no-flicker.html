@@ -60,6 +60,9 @@ a:hover { color: var(--accent-glow); }
 .article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
 .article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
@@ -118,7 +121,7 @@ a:hover { color: var(--accent-glow); }
       Here's how to enable it, what it actually does under the hood, and why it took over a year to get here.
     </p>
 
-    <h2>Enable it now</h2>
+    <h2 id="enable-it-now">Enable it now<a href="#enable-it-now" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Per session:
@@ -137,7 +140,7 @@ export CLAUDE_CODE_NO_FLICKER=1</code></pre>
       That's it. Restart Claude Code and the flickering is gone.
     </p>
 
-    <h2>The scale of the problem</h2>
+    <h2 id="the-scale-of-the-problem">The scale of the problem<a href="#the-scale-of-the-problem" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       This wasn't a minor annoyance. The GitHub issue tracker tells the story:
@@ -174,7 +177,7 @@ export CLAUDE_CODE_NO_FLICKER=1</code></pre>
       The community was frustrated enough to build their own fix: <a href="https://github.com/davidbeesley/claude-chill">claude-chill</a>, a Rust-based terminal proxy by David Beesley that intercepts Claude Code's output and only passes through actual changes. It got significant traction on Hacker News, with commenters noting the irony of a company building AI that can write code being unable to fix a terminal rendering bug.
     </p>
 
-    <h2>Why was this so hard to fix?</h2>
+    <h2 id="why-was-this-so-hard-to-fix">Why was this so hard to fix?<a href="#why-was-this-so-hard-to-fix" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Claude Code isn't a typical CLI. It's a full interactive TUI built with React and a custom terminal renderer. As Chris Lloyd, Anthropic's TUI rendering engineer, described it — <strong>it's closer to a small game engine than a standard terminal app.</strong>
@@ -196,7 +199,7 @@ export CLAUDE_CODE_NO_FLICKER=1</code></pre>
       All within a ~16ms frame budget. The problem is that terminals have no concept of atomic frame updates. Every escape sequence is processed immediately, so if you're updating the cursor position, streaming text, updating a spinner, and rendering the input box all at once — the terminal shows each intermediate state as a flash.
     </p>
 
-    <h2>A year of incremental fixes</h2>
+    <h2 id="a-year-of-incremental-fixes">A year of incremental fixes<a href="#a-year-of-incremental-fixes" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Anthropic didn't ignore the problem. They shipped fix after fix, each one getting closer:
@@ -214,7 +217,7 @@ export CLAUDE_CODE_NO_FLICKER=1</code></pre>
       They also pushed patches upstream to <strong>VS Code's terminal</strong> and <strong>tmux</strong> to support synchronized output (DEC mode 2026), which allows atomic frame updates in terminals that support it.
     </p>
 
-    <h2>What fullscreen mode actually does</h2>
+    <h2 id="what-fullscreen-mode-actually-does">What fullscreen mode actually does<a href="#what-fullscreen-mode-actually-does" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       When you set <code>CLAUDE_CODE_NO_FLICKER=1</code>, Claude Code switches to the <strong>alternate screen buffer</strong> — the same mechanism used by <code>vim</code>, <code>htop</code>, and <code>less</code>. This is fundamentally different from the default main-screen rendering:
@@ -228,7 +231,7 @@ export CLAUDE_CODE_NO_FLICKER=1</code></pre>
       <li><strong>Transcript mode</strong> — <code>Ctrl+o</code> gives you less-style navigation with <code>/</code> search</li>
     </ul>
 
-    <h2>The trade-offs</h2>
+    <h2 id="the-trade-offs">The trade-offs<a href="#the-trade-offs" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       There's a reason Anthropic didn't ship this as the default. Alt-screen mode trades away some native terminal features:
@@ -256,7 +259,7 @@ export CLAUDE_CODE_DISABLE_MOUSE_CLICKS=1
 # Adjust scroll speed (1-20, default is 1)
 export CLAUDE_CODE_SCROLL_SPEED=3</code></pre>
 
-    <h2>My take</h2>
+    <h2 id="my-take">My take<a href="#my-take" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       I use Claude Code daily in two ways: inside Cursor's integrated terminal and as a standalone CLI in a plain terminal. Both suffered from the flickering. Cursor sessions would slow to a crawl after 15-20 minutes, and in the plain terminal the scroll jumping made it hard to follow what Claude was doing.
@@ -290,8 +293,8 @@ export CLAUDE_CODE_SCROLL_SPEED=3</code></pre>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Previous post
     </a>
-    <a href="/#blog">
-      All posts
+    <a href="/blog/obsidian-llm-memory-organizer.html">
+      Next post
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
@@ -313,6 +316,13 @@ export CLAUDE_CODE_SCROLL_SPEED=3</code></pre>
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 })();
 </script>

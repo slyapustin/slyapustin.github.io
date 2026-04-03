@@ -5,8 +5,17 @@
     <link>https://slyapustin.com</link>
     <description>Notes on AI, engineering, and building things that matter. AI agent architecture, conversation intelligence, and LLM integration.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://slyapustin.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Your Second Brain Has Amnesia: Obsidian, LLMs, and the Race to Give AI Memory</title>
+      <link>https://slyapustin.com/blog/obsidian-llm-memory-organizer.html</link>
+      <guid>https://slyapustin.com/blog/obsidian-llm-memory-organizer.html</guid>
+      <pubDate>Thu, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Three ways to give AI persistent memory: Obsidian plugins, Claude Code's AutoMemory and Auto-Dream, and Karpathy's LLM-compiled wiki. What works, what breaks, and 16 practical tips to make each one better.</description>
+    </item>
 
     <item>
       <title>CLAUDE_CODE_NO_FLICKER: The Fix a Year in the Making</title>

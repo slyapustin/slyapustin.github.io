@@ -60,6 +60,9 @@ a:hover { color: var(--accent-glow); }
 .article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
 .article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
@@ -179,7 +182,7 @@ a:hover { color: var(--accent-glow); }
       <div class="diagram-caption">The great value migration: from implementation to go-to-market</div>
     </div>
 
-    <h2>The implementation premium is gone</h2>
+    <h2 id="the-implementation-premium-is-gone">The implementation premium is gone<a href="#the-implementation-premium-is-gone" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       For decades, the tech industry operated on a simple premise: building software is hard, therefore the people who can build it are valuable, and the companies that build the best version win.
@@ -201,7 +204,7 @@ a:hover { color: var(--accent-glow); }
       <p>When everyone can build, what you build matters less than why you build it and who you build it for.</p>
     </blockquote>
 
-    <h2>The vibe coding explosion</h2>
+    <h2 id="the-vibe-coding-explosion">The vibe coding explosion<a href="#the-vibe-coding-explosion" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       We're already seeing it. The "vibe coding" movement — people building apps by describing what they want to an AI — isn't a novelty. It's a preview of how most software will be created. Domain experts who understand their users' problems deeply are shipping products that compete with VC-funded teams, because <strong>understanding the problem is now more valuable than knowing how to code the solution</strong>.
@@ -211,7 +214,7 @@ a:hover { color: var(--accent-glow); }
       A real estate agent who builds a perfect lead qualification tool with AI assistance will outperform a team of engineers who build a generic CRM. Not because the code is better — because the product-market fit is better. The real estate agent <strong>is</strong> the user. They don't need user research. They don't need product managers to translate requirements. They just build what they need.
     </p>
 
-    <h2>Examples are everywhere</h2>
+    <h2 id="examples-are-everywhere">Examples are everywhere<a href="#examples-are-everywhere" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Look at what's happening right now:
@@ -228,13 +231,13 @@ a:hover { color: var(--accent-glow); }
       The pattern is consistent: <strong>the winners aren't the best builders — they're the best positioners.</strong>
     </p>
 
-    <h2>What actually differentiates now</h2>
+    <h2 id="what-actually-differentiates-now">What actually differentiates now<a href="#what-actually-differentiates-now" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       If implementation isn't the moat, what is? After watching dozens of AI-era products launch, fail, and succeed over the past year, the pattern is clear:
     </p>
 
-    <h3>1. Distribution beats product</h3>
+    <h3 id="distribution-beats-product">1. Distribution beats product<a href="#distribution-beats-product" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       The best product with no distribution loses to an adequate product with great distribution. Every time. This was always somewhat true, but now it's the dominant dynamic. <strong>When anyone can build your product in a weekend, your distribution advantage is everything.</strong>
@@ -244,25 +247,25 @@ a:hover { color: var(--accent-glow); }
       An existing audience, a trusted brand, access to a specific customer segment, partnerships, community — these are the assets that matter. They take years to build and can't be replicated with AI.
     </p>
 
-    <h3>2. Domain expertise is the real competitive advantage</h3>
+    <h3 id="domain-expertise-is-the-real-competitive-advantage">2. Domain expertise is the real competitive advantage<a href="#domain-expertise-is-the-real-competitive-advantage" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       AI makes building easy, but it doesn't give you <strong>deep understanding of a specific industry's pain points, workflows, regulations, and buying patterns</strong>. The engineer who spent 10 years in healthcare and understands HIPAA compliance, EMR integration challenges, and how doctors actually make purchasing decisions — that person can now build AND distribute a product in ways a generic AI startup cannot.
     </p>
 
-    <h3>3. Speed of iteration, not speed of initial development</h3>
+    <h3 id="speed-of-iteration-not-speed-of-initial-development">3. Speed of iteration, not speed of initial development<a href="#speed-of-iteration-not-speed-of-initial-development" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       Everyone can build v1 fast now. The winners are the ones who <strong>iterate fastest on feedback</strong>. That requires being close to your customers, having feedback loops that work, and making decisions quickly. It's an organizational and strategic advantage, not a technical one.
     </p>
 
-    <h3>4. Trust and relationships are unautomatable</h3>
+    <h3 id="trust-and-relationships-are-unautomatable">4. Trust and relationships are unautomatable<a href="#trust-and-relationships-are-unautomatable" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
 
     <p>
       Enterprise sales still run on trust. B2B still runs on relationships. Community-led growth still requires genuine engagement. AI can help you build the product, write the emails, and analyze the data — but <strong>it can't make someone trust you</strong>. Human connection is the last moat.
     </p>
 
-    <h2>What this means for engineers</h2>
+    <h2 id="what-this-means-for-engineers">What this means for engineers<a href="#what-this-means-for-engineers" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       This isn't a doom-and-gloom story for engineers. It's a reframing. <strong>The most valuable engineers are no longer the ones who write the most code — they're the ones who make the best decisions about what to build.</strong>
@@ -328,7 +331,7 @@ a:hover { color: var(--accent-glow); }
       Notice how the value progression moves <strong>away from implementation and toward judgment</strong>. The engineers who will thrive are the ones who understand their customers as deeply as they understand their codebase. The ones who can say "we shouldn't build this" as confidently as "here's how we build this."
     </p>
 
-    <h2>The new engineer's toolkit</h2>
+    <h2 id="the-new-engineers-toolkit">The new engineer's toolkit<a href="#the-new-engineers-toolkit" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       If you're an engineer adapting to this new reality, here's what I'd invest in:
@@ -342,7 +345,7 @@ a:hover { color: var(--accent-glow); }
       <li><strong>Ship fast, measure everything.</strong> The goal isn't to build the perfect product. It's to learn what works as quickly as possible. Use AI to ship prototypes in hours, then measure ruthlessly.</li>
     </ul>
 
-    <h2>From my own experience</h2>
+    <h2 id="from-my-own-experience">From my own experience<a href="#from-my-own-experience" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       This isn't theoretical for me. Recently, my team spent a couple of months discussing a product idea — debating features, market fit, monetization strategy, technical feasibility. Months of meetings, documents, and deep conversations that gave us really valuable insights and helped collect solid requirements about the system.
@@ -398,7 +401,7 @@ a:hover { color: var(--accent-glow); }
       That's the new reality. The person who understood the car buying process, knew the dealership tech stack, and had the industry network didn't need a team of engineers. AI was the team. <strong>The domain expertise and distribution were the real product.</strong>
     </p>
 
-    <h2>The uncomfortable truth</h2>
+    <h2 id="the-uncomfortable-truth">The uncomfortable truth<a href="#the-uncomfortable-truth" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Here's the part most engineers don't want to hear: <strong>your ability to write code is becoming less valuable every month.</strong> Not worthless — there will always be hard technical problems that require deep expertise. But the percentage of software work that falls into that category is shrinking rapidly.
@@ -451,6 +454,13 @@ a:hover { color: var(--accent-glow); }
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 })();
 </script>

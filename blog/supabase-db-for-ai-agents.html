@@ -60,6 +60,9 @@ a:hover { color: var(--accent-glow); }
 .article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
 .article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
@@ -219,7 +222,7 @@ a:hover { color: var(--accent-glow); }
       <div class="diagram-caption">Patchwork agent infrastructure vs. unified Supabase stack</div>
     </div>
 
-    <h2>PostgreSQL with superpowers</h2>
+    <h2 id="postgresql-with-superpowers">PostgreSQL with superpowers<a href="#postgresql-with-superpowers" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       At its core, Supabase is PostgreSQL. That matters enormously for AI agents, because <strong>agents need to reason about structured data, not just retrieve text chunks</strong>. Your agent needs to query user profiles, check permissions, look up order history, update records — all the things a relational database does brilliantly.
@@ -246,7 +249,7 @@ LIMIT 5;</code></pre>
       No separate vector database. No syncing data between systems. No eventual consistency headaches. <strong>Your agent can run a single query that combines semantic search with business rules, permissions, and joins across related tables.</strong> Try doing that with Pinecone + PostgreSQL as separate services.
     </p>
 
-    <h2>Real-time is native, not bolted on</h2>
+    <h2 id="real-time-is-native-not-bolted-on">Real-time is native, not bolted on<a href="#real-time-is-native-not-bolted-on" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Agents don't just read and write — they need to <strong>react to changes in real-time</strong>. When a user sends a message, when a tool call completes, when another agent updates shared state. Supabase's real-time subscriptions are built on PostgreSQL's WAL (Write-Ahead Log), which means you get change streams for free:
@@ -270,7 +273,7 @@ const channel = supabase
       This is incredibly powerful for multi-agent systems. Agent A can write to a shared table, and Agent B instantly picks up the change without polling. You get event-driven agent coordination <strong>without needing a separate message queue or pub/sub system</strong>.
     </p>
 
-    <h2>Row Level Security is agent guardrails</h2>
+    <h2 id="row-level-security-is-agent-guardrails">Row Level Security is agent guardrails<a href="#row-level-security-is-agent-guardrails" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       One of the hardest problems in agent applications is <strong>ensuring an agent can only access data it's authorized to see</strong>. An agent handling customer support for User A should never accidentally pull User B's data into its context. This isn't just a privacy concern — it's a safety concern, because the agent will reason about whatever data you give it.
@@ -362,7 +365,7 @@ CREATE POLICY "agent_message_insert" ON messages
     <p> This is defense-in-depth for AI — the guardrails are enforced at the database level, not in your application logic where they could be bypassed by a prompt injection or a code mistake.
     </p>
 
-    <h2>Edge Functions for agent tools</h2>
+    <h2 id="edge-functions-for-agent-tools">Edge Functions for agent tools<a href="#edge-functions-for-agent-tools" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Every agent needs tools — functions it can call to take actions in the world. Supabase Edge Functions give you a natural place to define these tools as serverless endpoints:
@@ -379,7 +382,7 @@ CREATE POLICY "agent_message_insert" ON messages
       Each tool is a self-contained function with its own authentication, validation, and error handling. The agent calls them through a clean interface, and <strong>each function runs with the appropriate database permissions thanks to RLS</strong>. Your tool layer and your data layer are unified.
     </p>
 
-    <h2>The agent memory pattern</h2>
+    <h2 id="the-agent-memory-pattern">The agent memory pattern<a href="#the-agent-memory-pattern" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Agent memory is one of the trickiest aspects of building conversational AI. You need short-term memory (current conversation), medium-term memory (recent interactions), and long-term memory (learned preferences and facts). Supabase handles all three naturally:
@@ -462,7 +465,7 @@ CREATE TABLE agent_memory (
       When the agent starts a new conversation, it can pull relevant long-term memories using vector similarity, load recent conversation summaries for context, and stream new messages in real-time. <strong>All from one database, with one connection, protected by one set of RLS policies.</strong>
     </p>
 
-    <h2>Auth that just works</h2>
+    <h2 id="auth-that-just-works">Auth that just works<a href="#auth-that-just-works" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Supabase Auth integrates directly with RLS. When a user authenticates, their identity flows through to every database query. This means your agent automatically inherits the user's permissions without any custom middleware:
@@ -479,7 +482,7 @@ CREATE TABLE agent_memory (
       For multi-tenant agent applications, this is massive. <strong>You don't need to build tenant isolation — it's built into the database.</strong>
     </p>
 
-    <h2>What's not perfect</h2>
+    <h2 id="whats-not-perfect">What's not perfect<a href="#whats-not-perfect" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       I want to be honest about the limitations I've hit:
@@ -491,7 +494,7 @@ CREATE TABLE agent_memory (
       <li><strong>Edge Function cold starts.</strong> For latency-sensitive agent tools, the cold start time on Edge Functions can be noticeable. Keeping functions warm or using a dedicated server for critical paths is sometimes necessary.</li>
     </ul>
 
-    <h2>The stack I recommend</h2>
+    <h2 id="the-stack-i-recommend">The stack I recommend<a href="#the-stack-i-recommend" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       After iterating on several agent architectures, here's the Supabase-centric stack that's worked best for me:
@@ -602,6 +605,13 @@ CREATE TABLE agent_memory (
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 })();
 </script>

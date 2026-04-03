@@ -58,6 +58,9 @@ a:hover { color: var(--accent-glow); }
 .article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
 .article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
@@ -109,7 +112,7 @@ a:hover { color: var(--accent-glow); }
       Not because Python is bad — it's excellent, and I still use it daily. The mistake was letting a programming language define the boundaries of what problems I could solve.
     </p>
 
-    <h2>The tribal problem</h2>
+    <h2 id="the-tribal-problem">The tribal problem<a href="#the-tribal-problem" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Our industry has a tribal problem. We sort ourselves into language camps — Pythonistas, Gophers, Rustaceans, the TypeScript crowd — and then view every problem through the lens of our chosen language. When you're a Python developer, every problem starts to look like it needs a Django app.
@@ -123,7 +126,7 @@ a:hover { color: var(--accent-glow); }
       <p>The best engineers I've worked with don't have a favorite language. They have favorite outcomes.</p>
     </blockquote>
 
-    <h2>What changed for me</h2>
+    <h2 id="what-changed-for-me">What changed for me<a href="#what-changed-for-me" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       The shift happened when I started working on AI systems. Suddenly I needed:
@@ -141,7 +144,7 @@ a:hover { color: var(--accent-glow); }
       No single language could have done all of this well. And the projects that succeeded weren't the ones with the most elegant code — they were the ones that <strong>picked the right tool for each component</strong>.
     </p>
 
-    <h2>The goal-focused framework</h2>
+    <h2 id="the-goal-focused-framework">The goal-focused framework<a href="#the-goal-focused-framework" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Instead of asking "how do I build this in Python?", I now start every project with different questions:
@@ -158,7 +161,7 @@ a:hover { color: var(--accent-glow); }
       The language falls out of this analysis naturally. Sometimes it's Python. Sometimes it's not. And that's fine.
     </p>
 
-    <h2>The practical benefits</h2>
+    <h2 id="the-practical-benefits">The practical benefits<a href="#the-practical-benefits" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Since adopting this mindset, I've noticed several tangible improvements:
@@ -180,7 +183,7 @@ a:hover { color: var(--accent-glow); }
       <strong>Career resilience.</strong> Languages rise and fall. Frameworks come and go. But the ability to learn new tools quickly and apply fundamental engineering principles — that never goes out of style.
     </p>
 
-    <h2>How to make the shift</h2>
+    <h2 id="how-to-make-the-shift">How to make the shift<a href="#how-to-make-the-shift" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       If you're currently a "X developer" and want to become a "developer who uses X (among other things)," here's what worked for me:
@@ -193,7 +196,7 @@ a:hover { color: var(--accent-glow); }
       <li><strong>Stop attending "Python conferences" and start attending "engineering conferences."</strong> The best talks are about solving problems, not about language features.</li>
     </ul>
 
-    <h2>A caveat: depth still matters</h2>
+    <h2 id="a-caveat-depth-still-matters">A caveat: depth still matters<a href="#a-caveat-depth-still-matters" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Being language-agnostic doesn't mean being shallow in everything. <strong>You should still have deep expertise in at least one or two ecosystems.</strong> The difference is that your depth comes from deliberate choice based on your current work, not from tribal loyalty.
@@ -242,6 +245,13 @@ a:hover { color: var(--accent-glow); }
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 })();
 </script>

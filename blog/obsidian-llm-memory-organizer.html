@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Your Second Brain Has Amnesia: Obsidian, LLMs, and the Race to Give AI Memory | Sergey Lyapustin</title>
+  <meta name="description" content="Three ways to give AI persistent memory: Obsidian plugins, Claude Code's AutoMemory and Auto-Dream, and Karpathy's LLM-compiled wiki. What works, what breaks, and 16 practical tips to make each one better.">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Sergey Lyapustin">
+  <meta property="article:published_time" content="2026-04-03">
+  <meta property="og:title" content="Your Second Brain Has Amnesia: Obsidian, LLMs, and the Race to Give AI Memory">
+  <meta property="og:description" content="Three ways to give AI persistent memory: Obsidian plugins, Claude Code's AutoMemory and Auto-Dream, and Karpathy's LLM-compiled wiki. What works, what breaks, and 16 practical tips to make each one better.">
+  <meta property="og:image" content="https://slyapustin.com/blog/og-obsidian-memory.jpg">
+  <meta property="og:url" content="https://slyapustin.com/blog/obsidian-llm-memory-organizer.html">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:image" content="https://slyapustin.com/blog/og-obsidian-memory.jpg">
+  <link rel="canonical" href="https://slyapustin.com/blog/obsidian-llm-memory-organizer.html">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Sergey Lyapustin">
+  <meta name="theme-color" content="#0a0a0f"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Your Second Brain Has Amnesia: Obsidian, LLMs, and the Race to Give AI Memory",
+    "description": "Three ways to give AI persistent memory: Obsidian plugins, Claude Code's AutoMemory and Auto-Dream, and Karpathy's LLM-compiled wiki. What works, what breaks, and 16 practical tips to make each one better.",
+    "author": {
+      "@type": "Person",
+      "name": "Sergey Lyapustin",
+      "url": "https://slyapustin.com"
+    },
+    "datePublished": "2026-04-03",
+    "image": "https://slyapustin.com/blog/og-obsidian-memory.jpg",
+    "url": "https://slyapustin.com/blog/obsidian-llm-memory-organizer.html",
+    "publisher": {
+      "@type": "Person",
+      "name": "Sergey Lyapustin"
+    }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKPLM8QC3P"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-VKPLM8QC3P")</script>
+<style>
+:root {
+  --accent: #7c6aef; --accent-glow: #9d8fff; --accent-dim: #4a3d8f;
+  --surface-0: #07070b; --surface-1: #0e0e15; --surface-2: #15151f; --surface-3: #1c1c2a;
+  --border: #1e1e2e; --border-subtle: #16161f;
+  --text-primary: #e8e6f0; --text-secondary: #8b889a; --text-tertiary: #5a576a; --text-accent: #b0a4f8;
+  --radius: 12px;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+[data-theme="light"] {
+  --surface-0: #f5f3f0; --surface-1: #ebe8e3; --surface-2: #e2dfd9; --surface-3: #d8d5ce;
+  --border: #d4d0c8; --border-subtle: #e0ddd6;
+  --text-primary: #1a1820; --text-secondary: #5e5b6a; --text-tertiary: #5a5770; --text-accent: #5b4bc7;
+  --accent: #5b4bc7; --accent-glow: #7c6aef; --accent-dim: #d4cff5;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--surface-0); color: var(--text-primary); line-height: 1.6; }
+::selection { background: var(--accent); color: #fff; }
+a { color: var(--text-accent); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--accent-glow); }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; display: flex; align-items: center; padding: 0 clamp(1.5rem, 4vw, 3rem); background: color-mix(in srgb, var(--surface-0) 80%, transparent); backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2); box-shadow: 0 1px 0 var(--border-subtle); }
+.nav-inner { max-width: 720px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: var(--font-display); font-size: 1.35rem; color: var(--text-primary); }
+.nav-logo em { font-style: normal; font-weight: 600; color: var(--accent); }
+.nav-back { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+.nav-back:hover { color: var(--text-primary); }
+.theme-toggle { background: none; border: 1px solid var(--border); color: var(--text-secondary); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s, transform .2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--text-primary); transform: rotate(30deg); }
+.article { max-width: 720px; margin: 0 auto; padding: calc(64px + 3rem) clamp(1.5rem, 4vw, 3rem) 4rem; }
+.article-date { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 1rem; }
+.article-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.article-title em { font-style: normal; font-weight: 700; color: var(--accent); }
+.article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
+.article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
+.article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
+.article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
+.article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
+.article-body p strong { color: var(--text-primary); font-weight: 500; }
+.article-body ul, .article-body ol { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; padding-left: 1.5rem; }
+.article-body li { margin-bottom: 0.5rem; }
+.article-body blockquote { border-left: 3px solid var(--accent-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--surface-1); border-radius: 0 var(--radius) var(--radius) 0; }
+.article-body blockquote p { color: var(--text-secondary); margin-bottom: 0; font-style: italic; }
+.article-body code { color: var(--text-primary); font-family: var(--font-mono); font-size: 0.88em; background: var(--surface-2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); }
+.article-body pre { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+.article-body pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.7; }
+.article-body hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+.article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.article-footer a { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+.article-footer a:hover { color: var(--text-primary); }
+.diagram {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+.diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+[data-theme="light"] .diagram svg rect[fill="#1c1c2a"] { fill: #d8d5ce; }
+[data-theme="light"] .diagram svg rect[fill="#15151f"] { fill: #ffffff; }
+[data-theme="light"] .diagram svg rect[fill="#0e0e15"] { fill: #ebe8e3; }
+[data-theme="light"] .diagram svg rect[stroke="#2e2e42"] { stroke: #d4d0c8; }
+[data-theme="light"] .diagram svg rect[stroke="#4a3d8f"] { stroke: #5b4bc7; }
+[data-theme="light"] .diagram svg text[fill="#e8e6f0"] { fill: #1a1820; }
+[data-theme="light"] .diagram svg text[fill="#8b889a"] { fill: #6b6878; }
+[data-theme="light"] .diagram svg text[fill="#5a576a"] { fill: #9e9baa; }
+[data-theme="light"] .diagram svg text[fill="#b0a4f8"] { fill: #5b4bc7; }
+[data-theme="light"] .diagram svg text[fill="#7c6aef"] { fill: #5b4bc7; }
+[data-theme="light"] .diagram svg path[stroke="#5a576a"] { stroke: #9e9baa; }
+[data-theme="light"] .diagram svg path[stroke="#3a3a52"] { stroke: #c4c0b8; }
+[data-theme="light"] .diagram svg path[stroke="#4a3d8f"] { stroke: #5b4bc7; }
+[data-theme="light"] .diagram svg line[stroke="#5a576a"] { stroke: #9e9baa; }
+[data-theme="light"] .diagram svg line[stroke="#2e2e42"] { stroke: #d4d0c8; }
+[data-theme="light"] .diagram svg rect[fill="#7c6aef"] { fill: #5b4bc7; }
+[data-theme="light"] .diagram svg text[fill="#e2b340"] { fill: #b8960a; }
+[data-theme="light"] .diagram svg text[fill="#4ade80"] { fill: #1a7a3a; }
+[data-theme="light"] .diagram svg rect[fill="#4ade80"] { fill: #1a7a3a; }
+[data-theme="light"] .diagram svg circle[fill="#4ade80"] { fill: #1a7a3a; }
+[data-theme="light"] .diagram svg circle[fill="#7c6aef"] { fill: #5b4bc7; }
+[data-theme="light"] .diagram svg circle[fill="#e2b340"] { fill: #b8960a; }
+.diagram-caption {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+  margin-top: 1rem;
+}
+@media (max-width: 640px) { .article-title { font-size: 1.8rem; } .diagram { padding: 1.25rem; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Sergey <em>Lyapustin</em></a>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="/#blog" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All posts
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main><article class="article">
+  <div class="article-date">April 3, 2026</div>
+  <h1 class="article-title">Your Second Brain Has <em>Amnesia</em></h1>
+  <div class="article-tags">
+    <span class="article-tag">Obsidian</span>
+    <span class="article-tag">LLMs</span>
+    <span class="article-tag">PKM</span>
+    <span class="article-tag">Claude Code</span>
+    <span class="article-tag">Memory</span>
+  </div>
+
+  <div class="article-body">
+    <p>
+      If you've ever used a note-taking app seriously — Obsidian, Notion, Apple Notes, whatever — you know the feeling. Hundreds of notes, all saved, all searchable in theory. <strong>And you can barely find anything when you actually need it.</strong> We got good at saving stuff. Terrible at finding it again. Your second brain has amnesia.
+    </p>
+
+    <p>
+      The obvious fix is to point an LLM at it. In 2026, three very different approaches are trying to solve this — Obsidian plugins, Claude Code's AutoMemory, and Andrej Karpathy's LLM-compiled wiki. Here's what works, what doesn't, and practical tips for each.
+    </p>
+
+    <div style="margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+      <img src="/blog/og-obsidian-memory.jpg" alt="A brain split between an organic knowledge graph and structured markdown files — the convergence of human notes and AI memory" width="1200" height="630" style="width:100%;height:auto;display:block;" loading="lazy">
+    </div>
+
+    <p>
+      There are <a href="https://forum.obsidian.md/t/why-isn-t-there-a-standard-interface-plugin-for-ai-llms-in-obsidian/95431">dozens of AI plugins</a> for Obsidian now — chat with your notes, find related notes, local-only privacy options, inline copilots. The ecosystem is fragmented (every plugin needs its own API key and stores data differently), but some things genuinely work.
+    </p>
+
+    <h2 id="where-it-works">Where it actually works<a href="#where-it-works" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Despite the mess, some things genuinely work:
+    </p>
+
+    <ul>
+      <li><strong>Summarizing research.</strong> Point the LLM at a group of notes on a topic and ask for a summary. Works well because the source material is right there — the AI doesn't need to guess.</li>
+      <li><strong>Finding forgotten connections.</strong> Meaning-based search finds notes that keyword search never would. One user had the AI connect a meeting note from 2024 with a research paper saved six months later — a link they'd never have spotted themselves.</li>
+      <li><strong>Spotting patterns.</strong> Ask the LLM to look at your reading highlights and it picks up themes you didn't notice. Topics you keep coming back to. Questions you circle around without answering.</li>
+      <li><strong>Auto-tagging.</strong> LLMs can tag notes with more detail and consistency than most humans bother with. Great for vaults that grew without any tagging system.</li>
+    </ul>
+
+    <h2 id="where-it-falls-apart">Where it falls apart<a href="#where-it-falls-apart" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      The problems are real, and some of them are hard to fix.
+    </p>
+
+    <h3 id="rag-personal-notes">RAG on personal notes is hard<a href="#rag-personal-notes" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      RAG was built for clean, well-structured documents. Personal vaults are the opposite — shorthand, messy formatting, abbreviations that only make sense if you remember what happened that day. The splitting strategies that work on docs break on daily journals. <strong>The AI pulls back fragments that look relevant but miss the point.</strong>
+    </p>
+
+    <h3 id="hallucination-personal-data">Hallucination over personal data is uniquely bad<a href="#hallucination-personal-data" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      When an LLM makes up a fact about the French Revolution, you can look it up. When it makes up a meeting that didn't happen, or puts the wrong words in someone's mouth from your own notes, it's different. <strong>You might actually believe it.</strong> Trust breaks fast when the AI is confidently wrong about your own life.
+    </p>
+
+    <p>
+      The best fix I've found: make the AI quote the source note directly in every answer. If it can't quote it, it shouldn't claim the info exists.
+    </p>
+
+    <h3 id="privacy-tension">The privacy tension has no easy answer<a href="#privacy-tension" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      Your Obsidian vault is probably the most personal data you have — more personal than email, because it's your raw, unfiltered thinking. Sending that to cloud APIs is a non-starter for many people. Running local models through Ollama keeps everything private, but the quality gap is real. Local models are slower, less smart, and struggle with the kind of nuance that personal notes need.
+    </p>
+
+    <h3 id="context-windows">Context windows still aren't enough<a href="#context-windows" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      Even with 200k+ token windows, a real vault won't fit. Two thousand notes at 500 words each is about 1.5 million tokens. So you need RAG, and RAG adds noise. You're always working with an incomplete slice of what you know.
+    </p>
+
+    <h2 id="mcp-shift">The MCP shift: from chat to agents<a href="#mcp-shift" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      The bigger shift in 2026 isn't chat plugins — it's <a href="https://modelcontextprotocol.io/">MCP</a>. The Model Context Protocol, built by Anthropic, gives AI agents a standard way to connect to tools and data sources. Several MCP servers for Obsidian have appeared, and they change what's possible: instead of just answering questions about your notes, an MCP agent can <strong>create notes, update tags, and build connections</strong>. The AI goes from search box to collaborator.
+    </p>
+
+    <p>
+      One trade-off: MCP tools eat context. Every tool definition takes up tokens, leaving less room for your notes and conversation. For simple tasks, lightweight skills are more efficient — MCP shines when the agent needs real-time read/write access to your vault.
+    </p>
+
+    <h2 id="automemory-autodream">Claude Code's answer: AutoMemory and Auto-Dream<a href="#automemory-autodream" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      While the Obsidian community was adding AI to existing notes, Anthropic went the other way. They built notes into the AI itself.
+    </p>
+
+    <p>
+      <strong>AutoMemory</strong>, shipped in Claude Code v2.1.59, automatically saves knowledge across sessions. You don't write anything. Claude decides what's worth remembering — build commands that worked, debugging insights, architecture decisions, code style preferences, workflow patterns — and writes it to plain markdown files in <code>~/.claude/projects/</code>.
+    </p>
+
+    <pre><code># Example: what AutoMemory captures automatically
+~/.claude/projects/my-app/memory/
+  MEMORY.md            # Index file, loaded at session start
+  debugging.md         # Patterns learned from past debugging sessions
+  api-conventions.md   # Style preferences inferred from your code
+  architecture.md      # Decisions and rationale from conversations</code></pre>
+
+    <p>
+      At the start of each session, Claude loads the first 200 lines of <code>MEMORY.md</code> into context. Detailed topic files are read on demand. The memory is machine-local, stored as plain markdown, and not synced to Anthropic's servers.
+    </p>
+
+    <p>
+      Then came <strong>Auto-Dream</strong>.
+    </p>
+
+    <p>
+      Auto-Dream is a background agent that cleans up memory files between sessions. It reads everything, finds contradictions, turns relative dates into real ones (so "yesterday" still means something next month), removes notes about deleted files, and merges duplicates. <strong>Think of it as REM sleep for AI — the cleanup your brain does while you're not using it.</strong>
+    </p>
+
+    <p>
+      Important safety detail: Auto-Dream can only touch memory files. It can read your code but never change it. It cleans up what the AI remembers, not what you've built.
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 620 230" fill="none" xmlns="http://www.w3.org/2000/svg" width="620">
+        <text x="310" y="20" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8b889a" letter-spacing="0.08em">THE AUTO-DREAM CYCLE</text>
+
+        <!-- Session 1 -->
+        <rect x="20" y="50" width="110" height="60" rx="8" fill="#7c6aef" opacity="0.2" stroke="#4a3d8f" stroke-width="1"/>
+        <text x="75" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#b0a4f8" font-weight="500">Session 1</text>
+        <text x="75" y="93" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#5a576a">memories saved</text>
+
+        <!-- Arrow -->
+        <path d="M135 80 L165 80" stroke="#5a576a" stroke-width="1.5"/>
+        <path d="M161,76 L165,80 L161,84" stroke="#5a576a" stroke-width="1.5" fill="none"/>
+
+        <!-- Session 2 -->
+        <rect x="170" y="50" width="110" height="60" rx="8" fill="#7c6aef" opacity="0.2" stroke="#4a3d8f" stroke-width="1"/>
+        <text x="225" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#b0a4f8" font-weight="500">Session 2</text>
+        <text x="225" y="93" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#5a576a">more memories</text>
+
+        <!-- Arrow -->
+        <path d="M285 80 L315 80" stroke="#5a576a" stroke-width="1.5"/>
+        <path d="M311,76 L315,80 L311,84" stroke="#5a576a" stroke-width="1.5" fill="none"/>
+
+        <!-- Session N -->
+        <rect x="320" y="50" width="110" height="60" rx="8" fill="#7c6aef" opacity="0.2" stroke="#4a3d8f" stroke-width="1"/>
+        <text x="375" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#b0a4f8" font-weight="500">Session N</text>
+        <text x="375" y="93" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#5a576a">duplicates, drift</text>
+
+        <!-- Arrow down -->
+        <path d="M375 115 L375 135" stroke="#e2b340" stroke-width="1.5"/>
+        <path d="M371,131 L375,135 L379,131" stroke="#e2b340" stroke-width="1.5" fill="none"/>
+
+        <!-- Dream box -->
+        <rect x="310" y="140" width="130" height="50" rx="8" fill="#e2b340" opacity="0.12" stroke="#e2b340" stroke-width="1" opacity="0.4"/>
+        <text x="375" y="162" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#e2b340" font-weight="500">Auto-Dream</text>
+        <text x="375" y="178" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#5a576a">consolidate</text>
+
+        <!-- Arrow to clean memory -->
+        <path d="M445 165 L475 165" stroke="#e2b340" stroke-width="1.5"/>
+        <path d="M471,161 L475,165 L471,169" stroke="#e2b340" stroke-width="1.5" fill="none"/>
+
+        <!-- Clean memory -->
+        <rect x="480" y="50" width="120" height="140" rx="8" fill="#4ade80" opacity="0.1" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+        <text x="540" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#4ade80" font-weight="500">Clean Memory</text>
+        <text x="540" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">deduped</text>
+        <text x="540" y="115" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">contradictions resolved</text>
+        <text x="540" y="130" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">dates absolute</text>
+        <text x="540" y="145" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">stale entries pruned</text>
+        <text x="540" y="160" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">topics merged</text>
+        <text x="540" y="178" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#4ade80">ready for next session</text>
+
+        <!-- Bottom label -->
+        <text x="310" y="215" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" fill="#e8e6f0" font-weight="500">REM sleep for AI — consolidation happens between sessions</text>
+      </svg>
+      <div class="diagram-caption">Auto-Dream: memory consolidation modeled on how brains process sleep</div>
+    </div>
+
+    <p>
+      As of April 2026, Auto-Dream is partially rolled out. The <code>/memory</code> menu references a <code>/dream</code> command, but it's gated by a server-side feature flag and <a href="https://github.com/anthropics/claude-code/issues/38461">returns "Unknown skill"</a> for most users. The feature is clearly coming — Anthropic just hasn't flipped the switch for everyone yet.
+    </p>
+
+    <h2 id="karpathy-approach">The Karpathy approach: let the LLM write the whole wiki<a href="#karpathy-approach" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Then there's the third approach — the most radical one. Andrej Karpathy recently <a href="https://x.com/karpathy/status/2039805659525644595">shared his workflow</a>, and it flips everything: <strong>the LLM doesn't search your notes. The LLM writes all the notes. You barely touch the wiki yourself.</strong>
+    </p>
+
+    <p>
+      The setup: dump raw sources (articles, papers, repos, images) into a <code>raw/</code> folder. Then have an LLM "compile" a wiki — markdown files with summaries, backlinks, concept articles, and cross-links. Obsidian is just the viewer. The LLM does all the writing and organizing.
+    </p>
+
+    <p>
+      The part that surprised me most:
+    </p>
+
+    <blockquote>
+      <p>I thought I had to reach for fancy RAG, but the LLM has been pretty good about auto-maintaining index files and brief summaries of all the documents and it reads all the important related data fairly easily at this ~small scale.</p>
+    </blockquote>
+
+    <p>
+      At ~100 articles and ~400K words, well-organized markdown with clean index files worked better than the RAG system he thought he'd need. The LLM keeps its own table of contents, so it knows where to look without vector search.
+    </p>
+
+    <p>
+      What makes it self-improving: answers go back into the wiki. Ask a question, get a markdown file with the answer, save it alongside everything else. Your research keeps building on itself. He also runs LLM "health checks" — scans that catch mistakes, fill in gaps, and suggest new articles to write. Basically Auto-Dream, but done by hand in an Obsidian vault.
+    </p>
+
+    <p>
+      Obsidian's creator kepano <a href="https://x.com/kepano/status/2039831289533227446">added an important point</a>: keep your personal vault separate from your agent vault. Let the AI make a mess in its own space. Only move stuff into your main vault once it's proven useful. <strong>Otherwise you end up with ideas you can't source — you won't know what's yours and what the AI made up.</strong>
+    </p>
+
+    <h2 id="three-approaches">Three approaches, same problem<a href="#three-approaches" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Step back and the convergence is striking. Three different approaches to the same problem, each with a different answer to "who does the work?"
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 620 380" fill="none" xmlns="http://www.w3.org/2000/svg" width="620">
+        <text x="310" y="20" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8b889a" letter-spacing="0.08em">THREE APPROACHES TO AI MEMORY</text>
+
+        <!-- Left: Obsidian -->
+        <rect x="20" y="40" width="180" height="200" rx="10" fill="#15151f" stroke="#2e2e42" stroke-width="1"/>
+        <text x="110" y="65" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" fill="#e8e6f0" font-weight="500">Obsidian + LLMs</text>
+        <text x="110" y="82" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#5a576a" letter-spacing="0.06em">BOTTOM-UP</text>
+
+        <circle cx="70" cy="125" r="18" fill="#4ade80" opacity="0.15" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+        <text x="70" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="16" fill="#4ade80">H</text>
+
+        <path d="M93 125 L127 125" stroke="#5a576a" stroke-width="1.5"/>
+        <path d="M123,121 L127,125 L123,129" stroke="#5a576a" stroke-width="1.5" fill="none"/>
+
+        <circle cx="150" cy="125" r="18" fill="#7c6aef" opacity="0.15" stroke="#7c6aef" stroke-width="1" opacity="0.4"/>
+        <text x="150" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">AI</text>
+
+        <text x="110" y="165" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">Human organizes</text>
+        <text x="110" y="177" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">AI retrieves</text>
+        <text x="110" y="197" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">Broad but shallow</text>
+        <text x="110" y="212" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">RAG quality varies</text>
+        <text x="110" y="227" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">You control structure</text>
+
+        <!-- Center: Karpathy -->
+        <rect x="220" y="40" width="180" height="200" rx="10" fill="#15151f" stroke="#e2b340" stroke-width="1"/>
+        <text x="310" y="65" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" fill="#e8e6f0" font-weight="500">LLM-Compiled Wiki</text>
+        <text x="310" y="82" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#e2b340" letter-spacing="0.06em">FULL DELEGATION</text>
+
+        <circle cx="270" cy="125" r="18" fill="#7c6aef" opacity="0.15" stroke="#7c6aef" stroke-width="1" opacity="0.4"/>
+        <text x="270" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">AI</text>
+
+        <path d="M293 125 L327 125" stroke="#5a576a" stroke-width="1.5"/>
+        <path d="M323,121 L327,125 L323,129" stroke="#5a576a" stroke-width="1.5" fill="none"/>
+
+        <circle cx="350" cy="125" r="18" fill="#7c6aef" opacity="0.15" stroke="#7c6aef" stroke-width="1" opacity="0.4"/>
+        <text x="350" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">AI</text>
+
+        <text x="310" y="165" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">AI writes the wiki</text>
+        <text x="310" y="177" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">AI queries it</text>
+        <text x="310" y="197" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">Self-improving</text>
+        <text x="310" y="212" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">No RAG needed (yet)</text>
+        <text x="310" y="227" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">Requires curation</text>
+
+        <!-- Right: AutoMemory -->
+        <rect x="420" y="40" width="180" height="200" rx="10" fill="#15151f" stroke="#4a3d8f" stroke-width="1"/>
+        <text x="510" y="65" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" fill="#e8e6f0" font-weight="500">AutoMemory</text>
+        <text x="510" y="82" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#5a576a" letter-spacing="0.06em">TOP-DOWN</text>
+
+        <circle cx="470" cy="125" r="18" fill="#7c6aef" opacity="0.15" stroke="#7c6aef" stroke-width="1" opacity="0.4"/>
+        <text x="470" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">AI</text>
+
+        <path d="M493 125 L527 125" stroke="#5a576a" stroke-width="1.5"/>
+        <path d="M523,121 L527,125 L523,129" stroke="#5a576a" stroke-width="1.5" fill="none"/>
+
+        <circle cx="550" cy="125" r="18" fill="#7c6aef" opacity="0.15" stroke="#7c6aef" stroke-width="1" opacity="0.4"/>
+        <text x="550" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">AI</text>
+
+        <text x="510" y="165" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">AI observes you</text>
+        <text x="510" y="177" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#8b889a">AI recalls later</text>
+        <text x="510" y="197" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">Zero effort</text>
+        <text x="510" y="212" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">Auto-Dream consolidates</text>
+        <text x="510" y="227" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#5a576a">Coding sessions only</text>
+
+        <!-- Shared base -->
+        <line x1="80" y1="260" x2="540" y2="260" stroke="#2e2e42" stroke-width="1"/>
+        <text x="310" y="285" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#e8e6f0" font-weight="500">All three use markdown files. All three are local-first.</text>
+        <text x="310" y="305" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#8b889a">The question: who does the work — you, or the AI?</text>
+
+        <!-- Spectrum arrow -->
+        <line x1="80" y1="340" x2="540" y2="340" stroke="#5a576a" stroke-width="1"/>
+        <path d="M536,336 L540,340 L536,344" stroke="#5a576a" stroke-width="1.5" fill="none"/>
+        <text x="80" y="360" font-family="ui-monospace,monospace" font-size="8" fill="#4ade80">MORE HUMAN CONTROL</text>
+        <text x="540" y="360" text-anchor="end" font-family="ui-monospace,monospace" font-size="8" fill="#b0a4f8">MORE AI AUTONOMY</text>
+        <circle cx="110" cy="340" r="4" fill="#4ade80"/>
+        <circle cx="310" cy="340" r="4" fill="#e2b340"/>
+        <circle cx="510" cy="340" r="4" fill="#7c6aef"/>
+      </svg>
+      <div class="diagram-caption">A spectrum from human-controlled to fully autonomous knowledge management</div>
+    </div>
+
+    <p>
+      Obsidian's AI plugins struggle with messy notes and can't know what's in your head. Karpathy's wiki needs you to feed it sources and run cleanup passes — but it gets better over time on its own. Claude's AutoMemory needs zero effort but only knows what happens in your coding sessions. Each one trades control for convenience in a different way.
+    </p>
+
+    <blockquote>
+      <p>The real question isn't which tool to pick. It's how much control you want to keep versus how much you're willing to hand to the AI.</p>
+    </blockquote>
+
+    <h2 id="making-memory-work">Making memory actually work: practical tips<a href="#making-memory-work" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Enough theory. Here's what actually makes a difference.
+    </p>
+
+    <h3 id="tips-claude-code">For Claude Code and AI coding agents<a href="#tips-claude-code" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <ul>
+      <li><strong>Keep CLAUDE.md under 200 lines.</strong> It gets loaded as a regular message, not a system prompt. Long files lose weight as the conversation grows. Put topic-specific rules in <code>.claude/rules/</code> with <code>paths:</code> frontmatter — they only load when Claude opens matching files. Way more efficient.</li>
+      <li><strong>MEMORY.md has a 200 line / 25KB cap.</strong> Anything past that never gets loaded at the start. Claude puts details in topic files like <code>debugging.md</code> and reads them when needed. If your MEMORY.md is too big, just edit it — it's a regular markdown file.</li>
+      <li><strong>Be specific, not vague.</strong> "Use 2-space indentation" works. "Write clean code" gets ignored. The more concrete the rule, the more reliably the agent follows it.</li>
+      <li><strong>CLAUDE.md is for your rules. Auto memory is for Claude's observations.</strong> They work together but serve different jobs. CLAUDE.md holds standards you set. Auto memory holds things Claude figured out on its own. Don't put the same stuff in both.</li>
+      <li><strong>Say "remember this" when it matters.</strong> Claude doesn't save things to memory as often as you'd think. When you make a big decision, tell it explicitly. Or put in your CLAUDE.md: "When we make an architecture decision, save it to memory."</li>
+      <li><strong>Ask for a handoff summary before ending long sessions.</strong> Have Claude write down what was done, what was decided, and what's next. More reliable than hoping auto memory got it all, and gives the next session a clear starting point.</li>
+      <li><strong>Clean up memory every ~20 sessions.</strong> Run <code>/memory</code>, open the folder, delete the stale stuff. Old memories pile up with dead file references and dates like "yesterday" that mean nothing now. Fix or remove them.</li>
+      <li><strong>Use CLAUDE.local.md for your personal stuff.</strong> Sandbox URLs, test data, shortcuts — put them in <code>CLAUDE.local.md</code> (gitignored). It loads after CLAUDE.md, so your personal settings win without messing up the team config.</li>
+    </ul>
+
+    <h3 id="tips-obsidian">For Obsidian vaults with AI<a href="#tips-obsidian" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      Quick background: there's a note-taking method called Zettelkasten — German for "slip box." Imagine a shoebox full of index cards. Each card has one idea on it. On the back, you write which other cards it connects to. That's the whole system. A sociologist named Niklas Luhmann used it to write 70+ books. The trick: his notes talked to each other. Obsidian users do the same thing with markdown files and <code>[[wiki links]]</code>. It turns out this approach — short notes, one idea each, linked together — works really well with AI search too.
+    </p>
+
+    <div style="margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+      <img src="/blog/zettelkasten-desk.jpg" alt="A wooden card catalog box with handwritten index cards on a desk, next to a laptop showing an Obsidian-style knowledge graph — the analog Zettelkasten method meeting its digital equivalent" width="1440" height="960" style="width:100%;height:auto;display:block;" loading="lazy">
+    </div>
+    <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-tertiary);margin-top:-0.75rem;margin-bottom:1.25rem;">
+      The Zettelkasten method: index cards with one idea each, linked by hand — now done with markdown and wiki links
+    </p>
+
+    <ul>
+      <li><strong>Start every note with a clear statement.</strong> Not "Notes on X" but "X works because Y." AI search tools weigh the first sentence heavily. A good opener is its own summary.</li>
+      <li><strong>Aim for 200–800 words per note.</strong> Too short and there's not enough context. Too long and the good stuff gets buried. If a note passes ~1,000 words, split it — but add a sentence or two at the top of each part so it makes sense on its own.</li>
+      <li><strong>Add a <code>summary</code> field in frontmatter.</strong> Frontmatter is the block of metadata at the top of a markdown file, wrapped in <code>---</code> lines. Obsidian uses it to store tags, dates, and custom fields. Adding a one or two sentence <code>summary</code> there gives AI search a strong signal — especially for messy notes where the body text is all shorthand.</li>
+      <li><strong>Write sentences, not just bullets.</strong> Bullet-heavy notes don't search well — each bullet has too little context on its own. Full sentences work much better for AI retrieval. Save bullets for actual lists.</li>
+      <li><strong>Tell the AI to stay in your vault.</strong> When asking questions, say "Use only my notes, not your general knowledge. If my notes don't cover this, tell me." Without this, LLMs quietly fill gaps with stuff from training data, and you can't tell what's yours.</li>
+      <li><strong>Make the AI quote its sources.</strong> If it can't quote the specific note, it shouldn't claim the info exists. This one rule kills most hallucination risk.</li>
+      <li><strong>Clean up as you go: tag-on-touch.</strong> Don't try to reorganize everything at once. Just spend 30 seconds adding frontmatter and a summary every time you open a note. After a few weeks, the notes you actually use are clean. The rest doesn't matter.</li>
+      <li><strong>Have AI write summary notes for you.</strong> Ask the LLM to read a group of related notes and write a single overview. These summaries become great search targets — better than any one source note — and they surface connections you missed.</li>
+    </ul>
+
+    <p>
+      One thing worth keeping in mind across all of this: a <a href="https://forum.obsidian.md/t/thinking-space-vs-second-brain-the-ideal-use-case-for-obsidian/91092">post on the Obsidian forum</a> puts it well — your vault works best as a <strong>thinking space</strong>, not a database. Use AI to find, summarize, and organize. But the part where you connect ideas and form opinions? That's yours. If you start writing notes for the AI instead of for yourself, you're optimizing for the wrong thing.
+    </p>
+
+    <hr>
+
+    <p>
+      Three approaches, one problem. Obsidian users are adding AI to their notes from the bottom up. Karpathy is handing the whole wiki to the LLM. Anthropic is building it in from the top down. <strong>All three use markdown files. All three keep your data local. And all three are still figuring out the same thing: what's worth remembering, and when should you forget?</strong>
+    </p>
+
+    <p>
+      Your second brain still has amnesia. But the treatment options are getting better fast.
+    </p>
+  </div>
+
+  <div class="article-footer">
+    <a href="/blog/claude-code-no-flicker.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Previous post
+    </a>
+    <a href="/#blog">
+      All posts
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</article></main>
+
+<script>
+(function() {
+  const themeToggle = document.getElementById('themeToggle');
+  const moonIcon = themeToggle.querySelector('.icon-moon');
+  const sunIcon = themeToggle.querySelector('.icon-sun');
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    moonIcon.style.display = theme === 'light' ? 'none' : 'block';
+    sunIcon.style.display = theme === 'light' ? 'block' : 'none';
+  }
+  const saved = localStorage.getItem('theme');
+  if (saved) { setTheme(saved); }
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
+  themeToggle.addEventListener('click', () => {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+</body>
+</html>

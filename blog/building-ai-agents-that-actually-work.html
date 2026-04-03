@@ -89,6 +89,9 @@ a:hover { color: var(--accent-glow); }
 
 .article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
 .article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
+.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
+.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
 .article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
 .article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
 .article-body p strong { color: var(--text-primary); font-weight: 500; }
@@ -145,7 +148,7 @@ a:hover { color: var(--accent-glow); }
       I've spent the past year shipping AI agents into production environments — not toy projects, but systems handling real conversations, real data, and real money. Here's what I've learned about making them actually work.
     </p>
 
-    <h2>The reliability illusion</h2>
+    <h2 id="the-reliability-illusion">The reliability illusion<a href="#the-reliability-illusion" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       The first thing you discover when building agents is that <strong>LLMs are probabilistic, but your users expect deterministic behavior</strong>. A customer service agent that occasionally hallucinates a refund policy doesn't just look bad — it creates legal liability.
@@ -161,7 +164,7 @@ a:hover { color: var(--accent-glow); }
       <li><strong>Build escape hatches.</strong> When the agent isn't confident (and you can measure this), gracefully hand off to a human. The best agent systems are human-AI hybrids, not full automation.</li>
     </ul>
 
-    <h2>Cost is a feature, not an afterthought</h2>
+    <h2 id="cost-is-a-feature-not-an-afterthought">Cost is a feature, not an afterthought<a href="#cost-is-a-feature-not-an-afterthought" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Here's something the tutorials never mention: <strong>a naive agent loop can cost $2-5 per conversation</strong>. At scale, that's catastrophic. I've seen teams build brilliant agents and then realize they can't afford to run them.
@@ -177,7 +180,7 @@ a:hover { color: var(--accent-glow); }
       <li><strong>Minimize context.</strong> Every token in your prompt costs money. Be ruthless about what goes into the context window. Summarize conversation history instead of passing raw transcripts.</li>
     </ul>
 
-    <h2>Trust is earned in milliseconds</h2>
+    <h2 id="trust-is-earned-in-milliseconds">Trust is earned in milliseconds<a href="#trust-is-earned-in-milliseconds" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       Users form their opinion of an AI agent in the first 2-3 interactions. If it fumbles early, they won't give it another chance — they'll just email support. This means your agent needs to be <strong>most reliable on the most common queries</strong>, not the edge cases.
@@ -191,7 +194,7 @@ a:hover { color: var(--accent-glow); }
       Invest heavily in the happy path. Profile your actual query distribution and optimize for the top 20 intents. Those will cover 80%+ of your traffic.
     </p>
 
-    <h2>The architecture that works</h2>
+    <h2 id="the-architecture-that-works">The architecture that works<a href="#the-architecture-that-works" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       After iterating through several architectures, here's the pattern that has worked best for production agents:
@@ -209,7 +212,7 @@ a:hover { color: var(--accent-glow); }
       This is more complex than "just call the API," but it's the difference between a demo and a system.
     </p>
 
-    <h2>Monitoring is your safety net</h2>
+    <h2 id="monitoring-is-your-safety-net">Monitoring is your safety net<a href="#monitoring-is-your-safety-net" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
 
     <p>
       You cannot ship an AI agent without comprehensive monitoring. Not just "is it up" monitoring — you need to track:
@@ -266,6 +269,13 @@ a:hover { color: var(--accent-glow); }
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
+    heading.addEventListener('click', function(e) {
+      if (e.target.closest('.anchor-icon')) return;
+      history.replaceState(null, '', '#' + heading.id);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 })();
 </script>
