@@ -108,6 +108,16 @@ a:hover { color: var(--accent-glow); }
 .article-footer a { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
 .article-footer a:hover { color: var(--text-primary); }
 
+.related-posts { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.related-posts h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--text-primary); margin-bottom: 1.25rem; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.related-card { display: block; padding: 1.25rem; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: border-color .2s, transform .2s; }
+.related-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.related-date { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+.related-card h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--text-primary); line-height: 1.35; margin: 0.5rem 0; }
+.related-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+@media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } }
+
 @media (max-width: 640px) { .article-title { font-size: 1.8rem; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 </style>
@@ -239,6 +249,27 @@ a:hover { color: var(--accent-glow); }
     <p>
       If you're building agents and hitting these same walls, I'd love to compare notes. The field is moving fast, but the engineering principles are timeless.
     </p>
+  </div>
+
+  <div class="related-posts">
+    <h2>Keep reading</h2>
+    <div class="related-grid">
+      <a href="/blog/rag-is-not-enough.html" class="related-card">
+        <span class="related-date">Feb 2026</span>
+        <h3>RAG Is Not Enough</h3>
+        <p>When RAG falls short and what to use instead — fine-tuning, tool use, agentic workflows, and a layered architecture.</p>
+      </a>
+      <a href="/blog/supabase-db-for-ai-agents.html" class="related-card">
+        <span class="related-date">Mar 2026</span>
+        <h3>Supabase: The Database AI Agents Deserve</h3>
+        <p>Why Supabase is the best database platform for AI agent applications — pgvector, real-time, RLS, and Edge Functions.</p>
+      </a>
+      <a href="/blog/obsidian-llm-memory-organizer.html" class="related-card">
+        <span class="related-date">Apr 2026</span>
+        <h3>Your Second Brain Has Amnesia</h3>
+        <p>Three ways to give AI persistent memory — Obsidian plugins, Claude Code AutoMemory, and Karpathy's LLM-compiled wiki.</p>
+      </a>
+    </div>
   </div>
 
   <div class="article-footer">

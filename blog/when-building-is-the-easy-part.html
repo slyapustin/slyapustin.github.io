@@ -108,6 +108,15 @@ a:hover { color: var(--accent-glow); }
   letter-spacing: 0.04em;
   margin-top: 1rem;
 }
+.related-posts { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.related-posts h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--text-primary); margin-bottom: 1.25rem; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.related-card { display: block; padding: 1.25rem; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: border-color .2s, transform .2s; }
+.related-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.related-date { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+.related-card h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--text-primary); line-height: 1.35; margin: 0.5rem 0; }
+.related-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+@media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .article-title { font-size: 1.8rem; } .diagram { padding: 1.25rem; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 </style>
@@ -424,6 +433,27 @@ a:hover { color: var(--accent-glow); }
     <p>
       The age of "if you build it, they will come" is over. It probably never existed. But now, with AI making the building part nearly free, there's nowhere left to hide behind technical complexity. <strong>Go-to-market is the new moat. Distribution is the new skill. And the engineers who figure this out first will define the next era of tech.</strong>
     </p>
+  </div>
+
+  <div class="related-posts">
+    <h2>Keep reading</h2>
+    <div class="related-grid">
+      <a href="/blog/obsidian-llm-memory-organizer.html" class="related-card">
+        <span class="related-date">Apr 2026</span>
+        <h3>Your Second Brain Has Amnesia</h3>
+        <p>Three ways to give AI persistent memory — Obsidian plugins, Claude Code AutoMemory, and Karpathy's LLM-compiled wiki.</p>
+      </a>
+      <a href="/blog/the-language-agnostic-engineer.html" class="related-card">
+        <span class="related-date">Jan 2026</span>
+        <h3>The Language-Agnostic Engineer</h3>
+        <p>Why focusing on outcomes over programming language identity leads to better architecture and better career decisions.</p>
+      </a>
+      <a href="/blog/building-ai-agents-that-actually-work.html" class="related-card">
+        <span class="related-date">Mar 2026</span>
+        <h3>Building AI Agents That Actually Work</h3>
+        <p>Lessons from shipping production AI agents — reliability, cost, trust, and monitoring.</p>
+      </a>
+    </div>
   </div>
 
   <div class="article-footer">
