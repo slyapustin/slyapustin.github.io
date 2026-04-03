@@ -19,6 +19,7 @@
   <meta name="author" content="Sergey Lyapustin">
   <meta name="theme-color" content="#0a0a0f"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preload" as="image" type="image/webp" href="/blog/og-obsidian-memory.webp">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -179,7 +180,10 @@ a:hover { color: var(--accent-glow); }
     </p>
 
     <div style="margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
-      <img src="/blog/og-obsidian-memory.jpg" alt="A brain split between an organic knowledge graph and structured markdown files — the convergence of human notes and AI memory" width="1200" height="630" style="width:100%;height:auto;display:block;" loading="lazy">
+      <picture>
+        <source srcset="/blog/og-obsidian-memory.webp" type="image/webp">
+        <img src="/blog/og-obsidian-memory.jpg" alt="A brain split between an organic knowledge graph and structured markdown files — the convergence of human notes and AI memory" width="1200" height="630" style="width:100%;height:auto;display:block;" fetchpriority="high">
+      </picture>
     </div>
 
     <p>
@@ -487,7 +491,10 @@ a:hover { color: var(--accent-glow); }
     </p>
 
     <div style="margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
-      <img src="/blog/zettelkasten-desk.jpg" alt="A wooden card catalog box with handwritten index cards on a desk, next to a laptop showing an Obsidian-style knowledge graph — the analog Zettelkasten method meeting its digital equivalent" width="1440" height="960" style="width:100%;height:auto;display:block;" loading="lazy">
+      <picture>
+        <source srcset="/blog/zettelkasten-desk.webp" type="image/webp">
+        <img src="/blog/zettelkasten-desk.jpg" alt="A wooden card catalog box with handwritten index cards on a desk, next to a laptop showing an Obsidian-style knowledge graph — the analog Zettelkasten method meeting its digital equivalent" width="1440" height="960" style="width:100%;height:auto;display:block;" loading="lazy">
+      </picture>
     </div>
     <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-tertiary);margin-top:-0.75rem;margin-bottom:1.25rem;">
       The Zettelkasten method: index cards with one idea each, linked by hand — now done with markdown and wiki links
