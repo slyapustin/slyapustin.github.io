@@ -1,0 +1,32 @@
+# Sergey Lyapustin
+
+> AI Architect with 15+ years in software engineering. Language-agnostic, goal-focused. Designing intelligent systems, leading engineering teams, and bridging the gap between AI research and production.
+
+## About
+
+- AI Architect and engineering leader
+- Focus areas: AI Agent Architecture, Conversation Intelligence, LLM Integration
+- Currently exploring: MCP servers, vCon standards, AI agent frameworks, Supabase + pgvector, Claude API
+- GitHub: https://github.com/slyapustin
+- Website: https://slyapustin.com
+- Email: hi@slyapustin.com
+- Blog RSS: https://slyapustin.com/feed.xml
+
+## Blog Posts
+
+- [Your Second Brain Has Amnesia: Obsidian, LLMs, and the Race to Give AI Memory](https://slyapustin.com/blog/obsidian-llm-memory-organizer.html): Three ways to give AI persistent memory — Obsidian plugins, Claude Code AutoMemory/Auto-Dream, and Karpathy's LLM-compiled wiki. Practical tips for each.
+- [CLAUDE_CODE_NO_FLICKER: The Fix a Year in the Making](https://slyapustin.com/blog/claude-code-no-flicker.html): Claude Code's terminal flickering was the most upvoted issue for over a year. How to enable the fix, what it does under the hood, and why it took so long.
+- [When Building Is the Easy Part: The New Role of the Engineer](https://slyapustin.com/blog/when-building-is-the-easy-part.html): AI collapsed the cost of building software. The value is shifting from implementation to strategy, domain expertise, and distribution.
+- [Supabase: The Database AI Agents Deserve](https://slyapustin.com/blog/supabase-db-for-ai-agents.html): Why Supabase is the best database platform for AI agent applications — pgvector, real-time, RLS as guardrails, Edge Functions as agent tools.
+- [Building AI Agents That Actually Work](https://slyapustin.com/blog/building-ai-agents-that-actually-work.html): Lessons from shipping production AI agents — reliability, cost optimization, trust, and monitoring.
+- [RAG Is Not Enough: When to Go Beyond Retrieval](https://slyapustin.com/blog/rag-is-not-enough.html): When RAG falls short and what to use instead — fine-tuning, tool use, agentic workflows, and a layered intelligence architecture.
+- [The Language-Agnostic Engineer](https://slyapustin.com/blog/the-language-agnostic-engineer.html): Why focusing on outcomes over programming language identity leads to better architecture and better career decisions.
+
+## Open Source
+
+- [datadog-mcp](https://github.com/slyapustin/datadog-mcp): MCP Server for Datadog monitoring and observability via Model Context Protocol
+- [MCP-Salesforce](https://github.com/slyapustin/MCP-Salesforce): MCP connector for Salesforce CRM
+- [fixly](https://github.com/slyapustin/fixly): AI-powered text fixer Chrome extension
+- [django-classified](https://github.com/slyapustin/django-classified): Django classified ads application (179 stars)
+- [django-chatbot](https://github.com/slyapustin/django-chatbot): Real-time chatbot with Django Channels and WebSocket (110 stars)
+- [django-s3-like-storage](https://github.com/slyapustin/django-s3-like-storage): S3-compatible Django storage backend (50 stars)

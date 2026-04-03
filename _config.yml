@@ -1,0 +1,29 @@
+title: "Sergey Lyapustin — AI Architect"
+description: "Notes on AI, engineering, and building things that matter."
+url: "https://slyapustin.com"
+baseurl: ""
+author: "Sergey Lyapustin"
+email: "hi@slyapustin.com"
+ga_tracking_id: "G-VKPLM8QC3P"
+
+permalink: /blog/:title.html
+
+markdown: kramdown
+highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - CLAUDE.md
+  - tmp/
+  - README.md
+  - .DS_Store
+  - node_modules/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Sergey Lyapustin"

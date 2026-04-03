@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Sergey Lyapustin — AI Architect</title>
+    <link>https://slyapustin.com</link>
+    <description>Notes on AI, engineering, and building things that matter. AI agent architecture, conversation intelligence, and LLM integration.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 03 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://slyapustin.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Your Second Brain Has Amnesia: Obsidian, LLMs, and the Race to Give AI Memory</title>
+      <link>https://slyapustin.com/blog/obsidian-llm-memory-organizer.html</link>
+      <guid>https://slyapustin.com/blog/obsidian-llm-memory-organizer.html</guid>
+      <pubDate>Thu, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Three ways to give AI persistent memory: Obsidian plugins, Claude Code's AutoMemory and Auto-Dream, and Karpathy's LLM-compiled wiki. What works, what breaks, and 16 practical tips to make each one better.</description>
+    </item>
+
+    <item>
+      <title>CLAUDE_CODE_NO_FLICKER: The Fix a Year in the Making</title>
+      <link>https://slyapustin.com/blog/claude-code-no-flicker.html</link>
+      <guid>https://slyapustin.com/blog/claude-code-no-flicker.html</guid>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Claude Code's terminal flickering was the most upvoted issue for over a year. Anthropic finally shipped CLAUDE_CODE_NO_FLICKER - here's the full story, what it does, and how to enable it.</description>
+    </item>
+
+    <item>
+      <title>When Building Is the Easy Part: The New Role of the Engineer</title>
+      <link>https://slyapustin.com/blog/when-building-is-the-easy-part.html</link>
+      <guid>https://slyapustin.com/blog/when-building-is-the-easy-part.html</guid>
+      <pubDate>Sat, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>AI collapsed the cost of building software. When anyone can ship a product in a weekend, what does that mean for engineers? The value is shifting from implementation to strategy, domain expertise, and distribution.</description>
+    </item>
+
+    <item>
+      <title>Supabase: The Database AI Agents Deserve</title>
+      <link>https://slyapustin.com/blog/supabase-db-for-ai-agents.html</link>
+      <guid>https://slyapustin.com/blog/supabase-db-for-ai-agents.html</guid>
+      <pubDate>Fri, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Why Supabase is quietly becoming the best database platform for AI agent applications — real-time subscriptions, pgvector, Row Level Security, and Edge Functions in one unified stack.</description>
+    </item>
+
+    <item>
+      <title>Building AI Agents That Actually Work</title>
+      <link>https://slyapustin.com/blog/building-ai-agents-that-actually-work.html</link>
+      <guid>https://slyapustin.com/blog/building-ai-agents-that-actually-work.html</guid>
+      <pubDate>Sat, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Lessons learned from shipping production AI agents — what the tutorials don't tell you about reliability, cost, and user trust.</description>
+    </item>
+
+    <item>
+      <title>RAG Is Not Enough: When to Go Beyond Retrieval</title>
+      <link>https://slyapustin.com/blog/rag-is-not-enough.html</link>
+      <guid>https://slyapustin.com/blog/rag-is-not-enough.html</guid>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>RAG got us far, but some problems need more. Exploring fine-tuning, tool use, and hybrid approaches for complex AI systems — and a practical layered architecture that uses the right technique for each query.</description>
+    </item>
+
+    <item>
+      <title>The Language-Agnostic Engineer</title>
+      <link>https://slyapustin.com/blog/the-language-agnostic-engineer.html</link>
+      <guid>https://slyapustin.com/blog/the-language-agnostic-engineer.html</guid>
+      <pubDate>Thu, 22 Jan 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Sergey Lyapustin</dc:creator>
+      <description>Why I stopped identifying with a single programming language and started focusing on outcomes. A case for tools over tribes — and how it changed the way I architect systems.</description>
+    </item>
+
+  </channel>
+</rss>
