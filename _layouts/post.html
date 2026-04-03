@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  {% include head.html %}
+  {% include head-meta-post.html %}
+  {% include jsonld-article.html %}
+  {% include gtag.html %}
+  {% if page.preload_image %}<link rel="preload" as="image" type="image/webp" href="{{ page.preload_image }}">{% endif %}
+<style>
+{% include css/variables.html %}
+{% include css/base.html %}
+{% include css/nav-post.html %}
+{% include css/article.html %}
+{% include css/related-posts.html %}
+{% if page.has_diagrams %}{% include css/diagram.html %}{% endif %}
+{% include css/responsive.html %}
+</style>
+</head>
+<body>
+
+{% include nav-post.html %}
+
+<main><article class="article">
+  <div class="article-date">{{ page.date | date: "%B %-d, %Y" }}</div>
+  <h1 class="article-title">{{ page.title_html | default: page.title }}</h1>
+  <div class="article-tags">
+    {% for tag in page.tags %}
+    <span class="article-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="article-body">
+    {{ content }}
+  </div>
+
+  {% include related-posts.html %}
+  {% include article-footer.html %}
+</article></main>
+
+{% include scripts-post.html %}
+</body>
+</html>

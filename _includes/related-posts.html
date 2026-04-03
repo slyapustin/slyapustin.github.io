@@ -1,0 +1,17 @@
+{% if page.related %}
+<div class="related-posts">
+  <h2>Keep reading</h2>
+  <div class="related-grid">
+    {% for slug in page.related %}
+      {% assign related_post = site.posts | where_exp: "p", "p.url contains slug" | first %}
+      {% if related_post %}
+      <a href="{{ related_post.url }}" class="related-card">
+        <span class="related-date">{{ related_post.date | date: "%b %Y" }}</span>
+        <h3>{{ related_post.card_title | default: related_post.title }}</h3>
+        <p>{{ related_post.card_excerpt | default: related_post.description | truncate: 120 }}</p>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,116 @@
+---
+layout: post
+title: "Building AI Agents That Actually Work"
+title_html: "Building AI Agents That <em>Actually Work</em>"
+date: 2026-03-15
+description: "Lessons learned from shipping production AI agents — what the tutorials don't tell you about reliability, cost, and user trust."
+tags: [AI Agents, LLMs, Production]
+read_time: 5
+card_title: "Building AI Agents That Actually Work"
+card_excerpt: "Lessons from shipping production AI agents — reliability, cost, trust, and the architecture that survives contact with real users."
+has_diagrams: false
+related:
+  - rag-is-not-enough
+  - supabase-db-for-ai-agents
+  - obsidian-llm-memory-organizer
+---
+
+    <p>
+      Everyone is building AI agents right now. The demos look incredible — an agent that books your flights, writes your code, manages your calendar. But there's a canyon between a demo that works 80% of the time and a production system that works 99% of the time. <strong>That last 19% is where the real engineering happens.</strong>
+    </p>
+
+    <p>
+      I've spent the past year shipping AI agents into production environments — not toy projects, but systems handling real conversations, real data, and real money. Here's what I've learned about making them actually work.
+    </p>
+
+    <h2 id="the-reliability-illusion">The reliability illusion<a href="#the-reliability-illusion" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      The first thing you discover when building agents is that <strong>LLMs are probabilistic, but your users expect deterministic behavior</strong>. A customer service agent that occasionally hallucinates a refund policy doesn't just look bad — it creates legal liability.
+    </p>
+
+    <p>
+      The solution isn't to make the LLM more reliable (you can't, fundamentally). It's to design your system so that unreliability is contained and correctable:
+    </p>
+
+    <ul>
+      <li><strong>Constrain the action space.</strong> Don't let your agent do anything — give it a specific set of tools with well-defined inputs and outputs. Every action should be reversible or require confirmation.</li>
+      <li><strong>Validate before executing.</strong> The agent proposes, the system disposes. Check every tool call against business rules before running it.</li>
+      <li><strong>Build escape hatches.</strong> When the agent isn't confident (and you can measure this), gracefully hand off to a human. The best agent systems are human-AI hybrids, not full automation.</li>
+    </ul>
+
+    <h2 id="cost-is-a-feature-not-an-afterthought">Cost is a feature, not an afterthought<a href="#cost-is-a-feature-not-an-afterthought" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Here's something the tutorials never mention: <strong>a naive agent loop can cost $2-5 per conversation</strong>. At scale, that's catastrophic. I've seen teams build brilliant agents and then realize they can't afford to run them.
+    </p>
+
+    <p>
+      Practical strategies that cut our costs by 80%:
+    </p>
+
+    <ul>
+      <li><strong>Route by complexity.</strong> Not every query needs your most powerful model. Use a small, fast classifier to route simple questions to cheaper models and only escalate to the big guns when needed.</li>
+      <li><strong>Cache aggressively.</strong> Semantic caching (not just exact-match) can handle 30-40% of queries without touching an LLM at all.</li>
+      <li><strong>Minimize context.</strong> Every token in your prompt costs money. Be ruthless about what goes into the context window. Summarize conversation history instead of passing raw transcripts.</li>
+    </ul>
+
+    <h2 id="trust-is-earned-in-milliseconds">Trust is earned in milliseconds<a href="#trust-is-earned-in-milliseconds" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Users form their opinion of an AI agent in the first 2-3 interactions. If it fumbles early, they won't give it another chance — they'll just email support. This means your agent needs to be <strong>most reliable on the most common queries</strong>, not the edge cases.
+    </p>
+
+    <blockquote>
+      <p>The best AI agent I've built handles 70% of cases flawlessly, 20% adequately, and routes the remaining 10% to humans. The worst AI agent I've seen tries to handle 100% of cases and fails unpredictably.</p>
+    </blockquote>
+
+    <p>
+      Invest heavily in the happy path. Profile your actual query distribution and optimize for the top 20 intents. Those will cover 80%+ of your traffic.
+    </p>
+
+    <h2 id="the-architecture-that-works">The architecture that works<a href="#the-architecture-that-works" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      After iterating through several architectures, here's the pattern that has worked best for production agents:
+    </p>
+
+    <ol>
+      <li><strong>Intent classifier</strong> — lightweight model that categorizes the request and decides the routing strategy</li>
+      <li><strong>Context assembler</strong> — pulls relevant data from your knowledge base, user history, and business rules</li>
+      <li><strong>Agent core</strong> — the LLM with tools, operating within a constrained action space specific to the classified intent</li>
+      <li><strong>Validator</strong> — checks the agent's proposed actions against business rules before execution</li>
+      <li><strong>Observer</strong> — logs everything, tracks confidence scores, and triggers human escalation when needed</li>
+    </ol>
+
+    <p>
+      This is more complex than "just call the API," but it's the difference between a demo and a system.
+    </p>
+
+    <h2 id="monitoring-is-your-safety-net">Monitoring is your safety net<a href="#monitoring-is-your-safety-net" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      You cannot ship an AI agent without comprehensive monitoring. Not just "is it up" monitoring — you need to track:
+    </p>
+
+    <ul>
+      <li><strong>Conversation quality scores</strong> — automated evaluation of every interaction</li>
+      <li><strong>Tool call success rates</strong> — which tools are failing and why</li>
+      <li><strong>Cost per conversation</strong> — broken down by intent category</li>
+      <li><strong>Escalation rate</strong> — how often the agent gives up</li>
+      <li><strong>User satisfaction signals</strong> — did the user achieve their goal?</li>
+    </ul>
+
+    <p>
+      Set up alerts on all of these. When your agent starts drifting (and it will — model updates, data distribution shifts, new edge cases), you want to catch it before your users do.
+    </p>
+
+    <hr>
+
+    <p>
+      Building production AI agents is hard, unglamorous engineering work. It's not about picking the right model or writing the perfect prompt — it's about building robust systems around fundamentally unpredictable components. <strong>The teams that succeed are the ones that treat AI as a component in a larger system, not as the system itself.</strong>
+    </p>
+
+    <p>
+      If you're building agents and hitting these same walls, I'd love to compare notes. The field is moving fast, but the engineering principles are timeless.
+    </p>

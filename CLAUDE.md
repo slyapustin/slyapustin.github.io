@@ -2,44 +2,70 @@
 
 ## Important
 - This is a PUBLIC repository. Never commit secrets, credentials, or sensitive information.
-- Deployed via GitHub Pages to slyapustin.com
+- Deployed via GitHub Pages to slyapustin.com (Jekyll 3.10, auto-built on push)
 - Git remote uses SSH: git@github.com:Slyapustin/slyapustin.github.io.git
+
+## Local Development
+```
+export PATH="/usr/local/opt/ruby@3.3/bin:/usr/local/lib/ruby/gems/3.3.0/bin:$PATH"
+bundle exec jekyll serve --port 4001
+```
+Site runs at http://localhost:4001. Uses Ruby 3.3 + `github-pages` gem (Jekyll 3.10).
+
+## Jekyll Structure
+- `_posts/` — blog posts as `.html` files with YAML frontmatter (NOT markdown)
+- `_layouts/post.html` — shared post template (nav, CSS, footer, related posts, scripts)
+- `_includes/` — CSS partials, nav, theme toggle, article footer, related posts, scripts
+- `_includes/css/` — variables, base, nav-post, article, related-posts, diagram, responsive
+- `index.html` — homepage with Liquid loop for blog cards
+- `feed.xml`, `sitemap.xml`, `llms.txt` — auto-generated from posts via Liquid templates
 
 ## Blog Post Checklist
 
-Every new blog post MUST include before deploying:
+To add a new post, create ONE file: `_posts/YYYY-MM-DD-slug.html`
 
-### HTML meta tags (all required):
-- `og:type` (article)
-- `og:title`
-- `og:description` (100+ characters for LinkedIn)
-- `og:image` (create OG screenshot — light theme, 1200x630)
-- `og:url`
-- `twitter:card` (summary_large_image)
-- `twitter:image`
-- `article:author` (Sergey Lyapustin)
-- `article:published_time`
-- `link rel="canonical"`
-- `meta name="robots"` (index, follow)
-- `meta name="author"`
-- `meta name="description"`
+### Required frontmatter:
+```yaml
+---
+layout: post
+title: "Full Title"
+title_html: "Title with <em>Accent Part</em>"
+date: YYYY-MM-DD
+description: "100+ chars for LinkedIn"
+og_image: /blog/og-filename.jpg
+tags: [Tag1, Tag2, Tag3]
+read_time: N
+card_title: "Shorter title for homepage cards"
+card_excerpt: "1-2 sentence excerpt for homepage cards"
+has_diagrams: true/false
+related:
+  - slug-of-related-post-1
+  - slug-of-related-post-2
+  - slug-of-related-post-3
+---
+```
+Optional: `preload_image: /blog/image.webp` for LCP optimization.
 
-### Update these files:
-- `index.html` — add blog card to blog section
-- `feed.xml` — add RSS item
-- `sitemap.xml` — add URL
-- Adjacent blog posts — update prev/next navigation links
-- `llms.txt` — add post to blog list
+### What's auto-generated (no manual editing needed):
+- Homepage blog card (from frontmatter)
+- RSS feed entry
+- Sitemap entry
+- llms.txt entry
+- Prev/next navigation
+- Related posts section
+- JSON-LD structured data
+- All meta tags (OG, Twitter, canonical, robots, author)
+- Heading anchor icons (via shared JS)
 
-### Heading anchors (all h2/h3 in article-body):
-- Every `<h2>` and `<h3>` must have a slug `id` attribute (e.g. `id="mcp-shift"`)
-- Append a chain-link SVG anchor icon: `<a href="#slug" class="anchor-icon" aria-label="Link to section"><svg ...></a>`
-- CSS: anchor icon hidden by default, visible on hover, `scroll-margin-top` for fixed nav offset
-- JS: clicking the heading text updates the URL hash via `history.replaceState`
+### Still manual:
+- Create OG image (light theme, 1200x630)
+- Write the article body HTML (goes after frontmatter)
+- Add `id` attributes to h2/h3 headings for anchor links
+- Add chain-link SVG anchor icon to each h2/h3: `<a href="#slug" class="anchor-icon" aria-label="Link to section"><svg ...></a>`
 
 ### Quality checks:
 - Lighthouse audit must score 100 on SEO, Accessibility, Best Practices
-- SVG diagrams must work in light mode (add CSS overrides for hardcoded dark colors)
+- SVG diagrams must work in light mode (shared overrides in `_includes/css/diagram.html`)
 - OG image must render in LinkedIn post inspector
 - No em dash replacement in CSS or HTML attributes (only in article body text)
 
@@ -53,3 +79,6 @@ Every new blog post MUST include before deploying:
 - screenshot-*.png
 - *-post.txt (social media drafts)
 - .DS_Store
+- _site/
+- Gemfile.lock
+- tmp/

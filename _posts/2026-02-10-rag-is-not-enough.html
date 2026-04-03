@@ -1,0 +1,139 @@
+---
+layout: post
+title: "RAG Is Not Enough: When to Go Beyond Retrieval"
+title_html: "RAG Is <em>Not Enough</em>"
+date: 2026-02-10
+description: "RAG got us far, but some problems need more. Exploring fine-tuning, tool use, and hybrid approaches for complex AI systems — and a practical layered architecture that uses the right technique for each query."
+tags: [RAG, Architecture]
+read_time: 4
+card_title: "RAG Is Not Enough"
+card_excerpt: "RAG got us far, but some problems need more. Exploring fine-tuning, tool use, and hybrid approaches for complex AI systems."
+has_diagrams: false
+related:
+  - obsidian-llm-memory-organizer
+  - building-ai-agents-that-actually-work
+  - supabase-db-for-ai-agents
+---
+
+    <p>
+      Retrieval-Augmented Generation has become the default architecture for building AI applications that need to work with private data. And for good reason — it's simple, it works, and it doesn't require training custom models. <strong>But RAG has limits, and I'm seeing more teams hit them.</strong>
+    </p>
+
+    <p>
+      After building several RAG systems and watching them struggle with certain problem types, I've developed a framework for deciding when RAG is enough and when you need to reach for something more powerful.
+    </p>
+
+    <h2 id="where-rag-shines">Where RAG shines<a href="#where-rag-shines" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Let's start with what RAG does well. It's genuinely excellent for:
+    </p>
+
+    <ul>
+      <li><strong>Question answering over documents</strong> — "What's our refund policy?" against a knowledge base</li>
+      <li><strong>Search-then-synthesize</strong> — finding relevant information and summarizing it</li>
+      <li><strong>Keeping LLMs grounded</strong> — reducing hallucination by providing source material</li>
+      <li><strong>Dynamic knowledge</strong> — when your data changes frequently and retraining isn't practical</li>
+    </ul>
+
+    <p>
+      If your problem fits these patterns, RAG is probably the right call. Don't over-engineer it.
+    </p>
+
+    <h2 id="the-five-signs-rag-isnt-enough">The five signs RAG isn't enough<a href="#the-five-signs-rag-isnt-enough" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <h3 id="your-queries-require-reasoning-across-multiple-documents">1. Your queries require reasoning across multiple documents<a href="#your-queries-require-reasoning-across-multiple-documents" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      RAG retrieves chunks and asks the LLM to synthesize. But what if the answer requires <strong>comparing information across 15 different documents</strong>, understanding temporal relationships, or resolving contradictions? The context window fills up fast, and the LLM's attention degrades.
+    </p>
+
+    <p>
+      I hit this wall building a system that needed to analyze compliance across regulatory documents. The answer wasn't in any single chunk — it emerged from the relationships between dozens of clauses across different regulations.
+    </p>
+
+    <h3 id="you-need-structured-output-with-high-precision">2. You need structured output with high precision<a href="#you-need-structured-output-with-high-precision" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      RAG gives you text in, text out. But if you need the system to <strong>reliably extract structured data</strong> — populate a form, generate a JSON object with specific fields, classify into exact categories — the retrieve-then-generate pattern often produces inconsistent results.
+    </p>
+
+    <h3 id="your-domain-has-specialized-language">3. Your domain has specialized language<a href="#your-domain-has-specialized-language" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      General-purpose embeddings work surprisingly well for most domains. But when your field has <strong>highly specialized terminology</strong> where the same word means completely different things in different contexts, off-the-shelf embeddings will retrieve the wrong chunks. Medical, legal, and financial domains hit this constantly.
+    </p>
+
+    <h3 id="the-task-requires-multi-step-workflows">4. The task requires multi-step workflows<a href="#the-task-requires-multi-step-workflows" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      "Look up this information and return it" is RAG's sweet spot. <strong>"Look up this information, then use it to make a decision, then take an action based on that decision"</strong> — that's an agent problem, not a retrieval problem.
+    </p>
+
+    <h3 id="latency-matters-more-than-accuracy">5. Latency matters more than accuracy<a href="#latency-matters-more-than-accuracy" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      RAG adds latency — embedding the query, searching the vector store, fetching chunks, then running the LLM with an extended context. If you need <strong>sub-second responses</strong> and the answer space is well-defined, a fine-tuned smaller model might serve you better.
+    </p>
+
+    <h2 id="the-alternatives-and-when-to-use-them">The alternatives and when to use them<a href="#the-alternatives-and-when-to-use-them" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      When RAG falls short, here's my decision tree:
+    </p>
+
+    <ul>
+      <li><strong>Fine-tuning</strong> — when you need the model to internalize domain knowledge, speak in a specific style, or produce structured outputs consistently. Best when your training data is stable.</li>
+      <li><strong>Tool use / function calling</strong> — when the task requires taking actions, querying APIs, or performing computations. The LLM reasons about what to do; the tools do the actual work.</li>
+      <li><strong>Agentic workflows</strong> — when the task requires multiple steps, conditional logic, and maintaining state across interactions. Think of it as orchestrating multiple RAG + tool-use calls.</li>
+      <li><strong>Hybrid approaches</strong> — often the answer is combining techniques. Fine-tune a model for your domain, give it RAG for current data, and tools for actions.</li>
+    </ul>
+
+    <h2 id="a-practical-hybrid-architecture">A practical hybrid architecture<a href="#a-practical-hybrid-architecture" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      The most successful system I've built recently uses what I call a <strong>"layered intelligence" approach</strong>:
+    </p>
+
+    <ol>
+      <li><strong>Layer 1: Cached responses</strong> — for common queries, skip the LLM entirely. Semantic similarity against a curated response bank.</li>
+      <li><strong>Layer 2: Simple RAG</strong> — for straightforward knowledge queries. Fast, cheap, good enough.</li>
+      <li><strong>Layer 3: Enhanced RAG</strong> — for complex queries. Multiple retrieval passes, re-ranking, chain-of-thought reasoning over retrieved context.</li>
+      <li><strong>Layer 4: Agent mode</strong> — for tasks requiring tools, multi-step reasoning, or external actions. The most expensive but most capable layer.</li>
+    </ol>
+
+    <p>
+      A lightweight classifier routes each query to the appropriate layer. <strong>90% of queries never reach Layer 4</strong>, keeping costs manageable while maintaining capability for the hard cases.
+    </p>
+
+    <blockquote>
+      <p>The best AI architecture isn't the most sophisticated one — it's the one that uses the minimum complexity needed for each specific query.</p>
+    </blockquote>
+
+    <h2 id="the-embedding-problem-nobody-talks-about">The embedding problem nobody talks about<a href="#the-embedding-problem-nobody-talks-about" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      One thing I want to flag: <strong>your retrieval is only as good as your embeddings and chunking strategy</strong>. I've seen teams spend weeks tuning their LLM prompts when the real problem was that their chunking was splitting critical information across chunks, or their embeddings were losing domain-specific nuance.
+    </p>
+
+    <p>
+      Before you abandon RAG, make sure you've actually optimized it:
+    </p>
+
+    <ul>
+      <li>Try domain-specific embedding models</li>
+      <li>Experiment with chunk sizes and overlap</li>
+      <li>Add metadata filtering to your retrieval</li>
+      <li>Implement re-ranking (a cross-encoder on top of your initial retrieval)</li>
+      <li>Use hybrid search (combining dense vectors with sparse keyword matching)</li>
+    </ul>
+
+    <p>
+      Sometimes "RAG isn't working" really means "RAG needs tuning."
+    </p>
+
+    <hr>
+
+    <p>
+      RAG is a tool, not a religion. Use it when it fits, combine it with other approaches when it doesn't, and always measure whether your system is actually solving the user's problem. <strong>The goal isn't to build the most elegant architecture — it's to deliver reliable answers.</strong>
+    </p>

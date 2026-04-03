@@ -1,0 +1,20 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": "Sergey Lyapustin",
+    "url": "{{ site.url }}"
+  },
+  "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
+  {% if page.og_image %}"image": "{{ page.og_image | absolute_url }}",{% endif %}
+  "url": "{{ page.url | absolute_url }}",
+  "publisher": {
+    "@type": "Person",
+    "name": "Sergey Lyapustin"
+  }
+}
+</script>
