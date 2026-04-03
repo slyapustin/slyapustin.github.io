@@ -1,155 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Supabase: The Database AI Agents Deserve | Sergey Lyapustin</title>
-  <meta name="description" content="Why Supabase is quietly becoming the best database platform for AI agent applications — real-time, vectors, auth, and edge functions in one stack.">
-  <meta property="og:type" content="article">
-  <meta property="article:author" content="Sergey Lyapustin">
-  <meta property="article:published_time" content="2026-03-28">
-  <meta property="og:title" content="Supabase: The Database AI Agents Deserve">
-  <meta property="og:description" content="Why Supabase is quietly becoming the best database platform for AI agent applications — real-time subscriptions, pgvector, Row Level Security, and Edge Functions in one unified stack.">
-  <meta property="og:image" content="https://slyapustin.com/blog/og-supabase.png">
-  <meta property="og:url" content="https://slyapustin.com/blog/supabase-db-for-ai-agents.html">
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:image" content="https://slyapustin.com/blog/og-supabase.png">
-  <link rel="canonical" href="https://slyapustin.com/blog/supabase-db-for-ai-agents.html">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Sergey Lyapustin">
-  <meta name="theme-color" content="#0a0a0f"/>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKPLM8QC3P"></script>
-  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-VKPLM8QC3P")</script>
-<style>
-:root {
-  --accent: #7c6aef; --accent-glow: #9d8fff; --accent-dim: #4a3d8f;
-  --surface-0: #07070b; --surface-1: #0e0e15; --surface-2: #15151f; --surface-3: #1c1c2a;
-  --border: #1e1e2e; --border-subtle: #16161f;
-  --text-primary: #e8e6f0; --text-secondary: #8b889a; --text-tertiary: #5a576a; --text-accent: #b0a4f8;
-  --radius: 12px;
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-  --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
-}
-[data-theme="light"] {
-  --surface-0: #f5f3f0; --surface-1: #ebe8e3; --surface-2: #e2dfd9; --surface-3: #d8d5ce;
-  --border: #d4d0c8; --border-subtle: #e0ddd6;
-  --text-primary: #1a1820; --text-secondary: #5e5b6a; --text-tertiary: #5a5770; --text-accent: #5b4bc7;
-  --accent: #5b4bc7; --accent-glow: #7c6aef; --accent-dim: #d4cff5;
-}
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-body { font-family: var(--font-body); background: var(--surface-0); color: var(--text-primary); line-height: 1.6; }
-::selection { background: var(--accent); color: #fff; }
-a { color: var(--text-accent); text-decoration: none; transition: color .2s; }
-a:hover { color: var(--accent-glow); }
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; display: flex; align-items: center; padding: 0 clamp(1.5rem, 4vw, 3rem); background: color-mix(in srgb, var(--surface-0) 80%, transparent); backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2); box-shadow: 0 1px 0 var(--border-subtle); }
-.nav-inner { max-width: 720px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { font-family: var(--font-display); font-size: 1.35rem; color: var(--text-primary); }
-.nav-logo em { font-style: normal; font-weight: 600; color: var(--accent); }
-.nav-back { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
-.nav-back:hover { color: var(--text-primary); }
-.theme-toggle { background: none; border: 1px solid var(--border); color: var(--text-secondary); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s, transform .2s; }
-.theme-toggle:hover { border-color: var(--accent); color: var(--text-primary); transform: rotate(30deg); }
-.article { max-width: 720px; margin: 0 auto; padding: calc(64px + 3rem) clamp(1.5rem, 4vw, 3rem) 4rem; }
-.article-date { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 1rem; }
-.article-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
-.article-title em { font-style: normal; font-weight: 700; color: var(--accent); }
-.article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-.article-tag { font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px; border-radius: 6px; background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
-.article-body h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 2.5rem 0 1rem; }
-.article-body h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.75rem; }
-.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(64px + 1.5rem); cursor: pointer; }
-.article-body h2[id] .anchor-icon, .article-body h3[id] .anchor-icon { opacity: 0; margin-left: 0.4em; color: var(--text-tertiary); transition: opacity .2s; text-decoration: none; vertical-align: middle; }
-.article-body h2[id]:hover .anchor-icon, .article-body h3[id]:hover .anchor-icon { opacity: 1; }
-.article-body a { text-decoration: underline; text-decoration-color: var(--accent-dim); text-underline-offset: 3px; }
-.article-body p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
-.article-body p strong { color: var(--text-primary); font-weight: 500; }
-.article-body ul, .article-body ol { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; padding-left: 1.5rem; }
-.article-body li { margin-bottom: 0.5rem; }
-.article-body blockquote { border-left: 3px solid var(--accent-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--surface-1); border-radius: 0 var(--radius) var(--radius) 0; }
-.article-body blockquote p { color: var(--text-secondary); margin-bottom: 0; font-style: italic; }
-.article-body code { color: var(--text-primary); font-family: var(--font-mono); font-size: 0.88em; background: var(--surface-2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); }
-.article-body pre { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
-.article-body pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.7; }
-.article-body hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-.article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.article-footer a { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
-.article-footer a:hover { color: var(--text-primary); }
-.diagram {
-  margin: 2rem 0;
-  padding: 2rem;
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow-x: auto;
-}
-.diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
-[data-theme="light"] .diagram svg rect[fill="#1c1c2a"] { fill: #d8d5ce; }
-[data-theme="light"] .diagram svg rect[fill="#15151f"] { fill: #ffffff; }
-[data-theme="light"] .diagram svg rect[stroke="#2e2e42"] { stroke: #d4d0c8; }
-[data-theme="light"] .diagram svg rect[stroke="#4a3d8f"] { stroke: #5b4bc7; }
-[data-theme="light"] .diagram svg text[fill="#e8e6f0"] { fill: #1a1820; }
-[data-theme="light"] .diagram svg text[fill="#8b889a"] { fill: #6b6878; }
-[data-theme="light"] .diagram svg text[fill="#5a576a"] { fill: #9e9baa; }
-[data-theme="light"] .diagram svg text[fill="#b0a4f8"] { fill: #5b4bc7; }
-[data-theme="light"] .diagram svg text[fill="#7c6aef"] { fill: #5b4bc7; }
-[data-theme="light"] .diagram svg path[stroke="#5a576a"] { stroke: #9e9baa; }
-[data-theme="light"] .diagram svg path[stroke="#3a3a52"] { stroke: #c4c0b8; }
-[data-theme="light"] .diagram svg line[stroke="#5a576a"] { stroke: #9e9baa; }
-[data-theme="light"] .diagram svg rect[fill="#7c6aef"] { fill: #5b4bc7; }
-[data-theme="light"] .diagram svg text[fill="#e2b340"] { fill: #b8960a; }
-.diagram-caption {
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-tertiary);
-  letter-spacing: 0.04em;
-  margin-top: 1rem;
-}
-.related-posts { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-.related-posts h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--text-primary); margin-bottom: 1.25rem; }
-.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.related-card { display: block; padding: 1.25rem; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: border-color .2s, transform .2s; }
-.related-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-.related-date { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
-.related-card h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--text-primary); line-height: 1.35; margin: 0.5rem 0; }
-.related-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
-@media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .article-title { font-size: 1.8rem; } .diagram { padding: 1.25rem; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
-</style>
-</head>
-<body>
+---
+layout: post
+title: "Supabase: The Database AI Agents Deserve"
+title_html: "Supabase: The Database <em>AI Agents Deserve</em>"
+date: 2026-03-28
+description: "Why Supabase is quietly becoming the best database platform for AI agent applications — real-time, vectors, auth, and edge functions in one stack."
+og_image: /blog/og-supabase.png
+tags: [Supabase, AI Agents, Database, Architecture]
+read_time: 8
+card_title: "Supabase: The Database AI Agents Deserve"
+card_excerpt: "Why Supabase is quietly becoming the best database platform for AI agent applications — real-time subscriptions, pgvector, RLS, and Edge Functions in one unified stack."
+has_diagrams: true
+related:
+  - building-ai-agents-that-actually-work
+  - rag-is-not-enough
+  - obsidian-llm-memory-organizer
+---
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo">Sergey <em>Lyapustin</em></a>
-    <div style="display:flex;align-items:center;gap:1rem;">
-      <a href="/#blog" class="nav-back">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        All posts
-      </a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<main><article class="article">
-  <div class="article-date">March 28, 2026</div>
-  <h1 class="article-title">Supabase: The Database <em>AI Agents Deserve</em></h1>
-  <div class="article-tags">
-    <span class="article-tag">Supabase</span>
-    <span class="article-tag">AI Agents</span>
-    <span class="article-tag">Database</span>
-    <span class="article-tag">Architecture</span>
-  </div>
-
-  <div class="article-body">
     <p>
       Every AI agent needs a place to store state — conversation history, user context, retrieved documents, tool results, memory. Most teams reach for a patchwork: a vector database here, a key-value store there, a relational database for the business logic, and maybe Redis for real-time state. <strong>Supabase collapses all of that into one platform, and it's remarkably well-suited for agent architectures.</strong>
     </p>
@@ -584,66 +450,3 @@ CREATE TABLE agent_memory (
     <p>
       If you're starting a new agent project and wondering about your data layer, give Supabase a serious look. You might be surprised how much of your infrastructure it can replace.
     </p>
-  </div>
-
-  <div class="related-posts">
-    <h2>Keep reading</h2>
-    <div class="related-grid">
-      <a href="/blog/building-ai-agents-that-actually-work.html" class="related-card">
-        <span class="related-date">Mar 2026</span>
-        <h3>Building AI Agents That Actually Work</h3>
-        <p>Lessons from shipping production AI agents — reliability, cost, trust, and monitoring.</p>
-      </a>
-      <a href="/blog/rag-is-not-enough.html" class="related-card">
-        <span class="related-date">Feb 2026</span>
-        <h3>RAG Is Not Enough</h3>
-        <p>When RAG falls short and what to use instead — fine-tuning, tool use, agentic workflows, and a layered architecture.</p>
-      </a>
-      <a href="/blog/obsidian-llm-memory-organizer.html" class="related-card">
-        <span class="related-date">Apr 2026</span>
-        <h3>Your Second Brain Has Amnesia</h3>
-        <p>Three ways to give AI persistent memory — Obsidian plugins, Claude Code AutoMemory, and Karpathy's LLM-compiled wiki.</p>
-      </a>
-    </div>
-  </div>
-
-  <div class="article-footer">
-    <a href="/blog/when-building-is-the-easy-part.html">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Previous post
-    </a>
-    <a href="/blog/building-ai-agents-that-actually-work.html">
-      Next post
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
-</article></main>
-
-<script>
-(function() {
-  const themeToggle = document.getElementById('themeToggle');
-  const moonIcon = themeToggle.querySelector('.icon-moon');
-  const sunIcon = themeToggle.querySelector('.icon-sun');
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    moonIcon.style.display = theme === 'light' ? 'none' : 'block';
-    sunIcon.style.display = theme === 'light' ? 'block' : 'none';
-  }
-  const saved = localStorage.getItem('theme');
-  if (saved) { setTheme(saved); }
-  else if (window.matchMedia('(prefers-color-scheme: light)').matches) { setTheme('light'); }
-  themeToggle.addEventListener('click', () => {
-    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
-  document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
-    heading.addEventListener('click', function(e) {
-      if (e.target.closest('.anchor-icon')) return;
-      history.replaceState(null, '', '#' + heading.id);
-      heading.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-})();
-</script>
-</body>
-</html>
