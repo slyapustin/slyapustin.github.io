@@ -1,7 +1,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.description | jsonify }},
   "author": {
@@ -10,8 +10,13 @@
     "url": "{{ site.url }}"
   },
   "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
+  "dateModified": "{{ page.date | date: '%Y-%m-%d' }}",
   {% if page.og_image %}"image": "{{ page.og_image | absolute_url }}",{% endif %}
   "url": "{{ page.url | absolute_url }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  },
   "publisher": {
     "@type": "Person",
     "name": "Sergey Lyapustin"

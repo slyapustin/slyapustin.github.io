@@ -8,7 +8,11 @@
 {% if page.og_image %}<meta property="og:image" content="{{ page.og_image | absolute_url }}">{% endif %}
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="{{ page.title }}">
+<meta property="twitter:description" content="{{ page.description }}">
 {% if page.og_image %}<meta property="twitter:image" content="{{ page.og_image | absolute_url }}">{% endif %}
+{% for tag in page.tags %}<meta property="article:tag" content="{{ tag }}">
+{% endfor %}
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Sergey Lyapustin">
