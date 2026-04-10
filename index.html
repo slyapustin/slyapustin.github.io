@@ -1460,7 +1460,7 @@ a:hover { color: var(--accent-glow); }
     <div class="blog-grid" id="blogGrid">
 
       {% for post in site.posts %}
-      <a href="{{ post.url }}" class="blog-card reveal{% cycle '', ' reveal-delay-1', ' reveal-delay-2' %}">
+      <a href="{{ post.url }}" class="blog-card reveal{% cycle '', ' reveal-delay-1', ' reveal-delay-2' %}" data-tags="{{ post.tags | join: ',' }}">
         <span class="blog-card-date">{{ post.date | date: "%b %Y" }} &middot; {{ post.read_time }} min read</span>
         <h3 class="blog-card-title">{{ post.card_title | default: post.title }}</h3>
         <p class="blog-card-excerpt">{{ post.card_excerpt | default: post.description | truncate: 150 }}</p>
@@ -1484,7 +1484,7 @@ a:hover { color: var(--accent-glow); }
         <span class="blog-card-read">Read on Medium <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       </a>
 
-      <a href="https://medium.com/@s.lyapustin/heroku-chatbot-with-celery-websockets-and-redis-340ffc491f82" target="_blank" rel="noopener" class="blog-card reveal reveal-delay-1">
+      <a href="https://medium.com/itnext/heroku-chatbot-with-celery-websockets-and-redis-340fcd160f06" target="_blank" rel="noopener" class="blog-card reveal reveal-delay-1">
         <span class="blog-card-date">Jul 2019</span>
         <h3 class="blog-card-title">Heroku Chatbot with Celery, WebSockets, and Redis</h3>
         <p class="blog-card-excerpt">Building a real-time chatbot using Django Channels, Celery for async tasks, and Redis as the message broker.</p>
@@ -1496,7 +1496,7 @@ a:hover { color: var(--accent-glow); }
         <span class="blog-card-read">Read on Medium <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       </a>
 
-      <a href="https://medium.com/@s.lyapustin/django-polls-app-with-elasticsearch-ffc02b9e5d36" target="_blank" rel="noopener" class="blog-card reveal reveal-delay-2">
+      <a href="https://medium.com/@s.lyapustin/django-polls-app-with-elasticsearch-ffc02b9e79d9" target="_blank" rel="noopener" class="blog-card reveal reveal-delay-2">
         <span class="blog-card-date">Nov 2018</span>
         <h3 class="blog-card-title">Django Polls App with Elasticsearch</h3>
         <p class="blog-card-excerpt">Adding powerful full-text search to a Django application using Elasticsearch and django-elasticsearch-dsl.</p>
@@ -1615,6 +1615,34 @@ a:hover { color: var(--accent-glow); }
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
+<script>
+(function() {
+  var tag = new URLSearchParams(window.location.search).get('tag');
+  if (!tag) return;
+  var grid = document.getElementById('blogGrid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.blog-card');
+  var hasMatch = false;
+  cards.forEach(function(card) {
+    var tags = (card.getAttribute('data-tags') || '').split(',');
+    if (tags.indexOf(tag) === -1) {
+      card.style.opacity = '0.25';
+      card.style.pointerEvents = 'none';
+    } else {
+      hasMatch = true;
+    }
+  });
+  if (hasMatch) {
+    var chip = document.createElement('div');
+    chip.style.cssText = 'display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:6px;background:var(--surface-2);border:1px solid var(--accent-dim);font-family:var(--font-mono);font-size:0.78rem;color:var(--text-secondary);margin-bottom:1.5rem;cursor:pointer;';
+    chip.innerHTML = 'Filtered by: <strong style="color:var(--accent)">' + tag + '</strong> <span style="opacity:0.5">&times;</span>';
+    chip.addEventListener('click', function() {
+      window.location.href = '/#blog';
+    });
+    grid.parentNode.insertBefore(chip, grid);
+  }
 })();
 </script>
 

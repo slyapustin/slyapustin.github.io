@@ -1,0 +1,300 @@
+---
+layout: post
+title: "When Everyone Has a Dev Team: The CTO Role in the Age of AI Agents"
+title_html: "When Everyone Has a <em>Dev Team</em>"
+date: 2026-04-10
+description: "AI agents gave everyone a development team. For small-company CTOs, the job didn't shrink — it rewrote itself. From chief builder to context architect, quality gatekeeper, and talent strategist."
+og_image: /blog/og-when-everyone-has-a-dev-team.jpg
+preload_image: /blog/everyone-dev-team.webp
+tags: [CTO, AI Engineering, Engineering Leadership, Agentic, Strategy]
+read_time: 9
+card_title: "When Everyone Has a Dev Team"
+card_excerpt: "AI agents gave everyone a development team. The CTO role didn't shrink — it rewrote itself."
+has_diagrams: true
+related:
+  - from-vibe-coding-to-agentic-engineering
+  - when-building-is-the-easy-part
+  - building-ai-agents-that-actually-work
+---
+
+    <p>
+      Your five-person engineering team just started using Claude Code and Codex. Within weeks, each engineer is running multiple AI agent sessions at once. Pull requests doubled. But so did the bugs. Your lead engineer now spends more time reviewing AI output than writing code. You're the CTO — and you realize your job just changed underneath you.
+    </p>
+
+    <p>
+      Meanwhile, two things happened in the same month. Atlassian <a href="https://www.humai.blog/atlassian-replaced-its-cto-with-two-ai-focused-ctos-what-this-signals-about-the-future-of-technical-leadership/">replaced their CTO with <em>two</em> AI-focused CTOs</a> and cut 1,600 jobs. And a solo founder with no team shipped a product that competes with yours — built entirely with AI agents.
+    </p>
+
+    <p>
+      The CTO role is being pulled in two directions at once. At the top, it's splitting because one person can't cover both AI product strategy and AI governance. At the bottom, it's being <strong>democratized</strong> — anyone with access to AI agents now has the functional equivalent of a small engineering org.
+    </p>
+
+    <p>
+      So what's the actual job now? Especially if you're not running a 5,000-person enterprise — if you're the CTO of a 10, 20, or 50-person company where you still touch the code yourself?
+    </p>
+
+    <div style="margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+      <picture>
+        <source srcset="/blog/everyone-dev-team.webp" type="image/webp">
+        <img src="/blog/everyone-dev-team.jpg" alt="A single person at a desk surrounded by multiple glowing screens showing code, architecture diagrams, and agent sessions — the modern CTO orchestrating AI agents" width="1440" height="960" style="width:100%;height:auto;display:block;" fetchpriority="high">
+      </picture>
+    </div>
+
+    <h2 id="everyone-got-a-dev-team">Everyone got a dev team overnight<a href="#everyone-got-a-dev-team" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      One person with Claude Code, Codex, Cursor, and a few MCP tools now has the output of a small engineering org. Coding agents write features. Research agents scan documentation. Testing agents find bugs. Deployment is a command away. <strong>The tools that used to require a team now fit in one terminal window.</strong>
+    </p>
+
+    <p>
+      At a small company, this hits differently than at an enterprise. You didn't hire 15 more people. You gave 5 people superpowers they don't fully control yet. Each engineer running three to five parallel agent sessions means your team is producing at a rate you never planned for — and your review process, your architecture, and your quality gates weren't built for this volume.
+    </p>
+
+    <p>
+      Steve Yegge described an <a href="https://newsletter.pragmaticengineer.com/p/steve-yegge-on-ai-agents-and-the">8-level AI adoption scale</a> — from no AI at level 1 to custom agent orchestrators at level 8. Most small teams jumped from level 2 (basic autocomplete) to level 5 (trusting agents with real work) almost overnight. They skipped the maturity steps in between. And that gap — between capability and readiness — is where the CTO problems live.
+    </p>
+
+    <p>
+      I wrote before that <a href="/blog/when-building-is-the-easy-part">building is now the easy part</a>. That was about the industry. This is about what it means for the person at the top of a small engineering team. <strong>Your job moved from "the technical lead who codes" to "the person who makes sure all this AI-amplified output actually serves the business."</strong>
+    </p>
+
+    <h2 id="what-the-cto-job-became">What the small-company CTO job actually became<a href="#what-the-cto-job-became" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      At a big company, the CTO was already far from the code. At a small company, the CTO <em>was</em> the best engineer. The one who could debug anything, architect anything, ship the hardest features. That version of the job is disappearing — not because those skills don't matter, but because the leverage moved.
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 620 320" fill="none" xmlns="http://www.w3.org/2000/svg" width="620">
+        <text x="310" y="24" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#8b889a" letter-spacing="0.08em">THE CTO ROLE: THEN vs NOW</text>
+
+        <!-- Left: 2024 -->
+        <text x="155" y="58" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#5a576a" letter-spacing="0.06em">2024</text>
+        <rect x="20" y="72" width="270" height="44" rx="8" fill="#7c6aef" opacity="0.12" stroke="#7c6aef" stroke-width="0.5" opacity="0.3"/>
+        <text x="155" y="99" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">Architecture decisions</text>
+        <rect x="20" y="124" width="270" height="44" rx="8" fill="#7c6aef" opacity="0.12" stroke="#7c6aef" stroke-width="0.5" opacity="0.3"/>
+        <text x="155" y="151" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">Code reviews &amp; debugging</text>
+        <rect x="20" y="176" width="270" height="44" rx="8" fill="#7c6aef" opacity="0.12" stroke="#7c6aef" stroke-width="0.5" opacity="0.3"/>
+        <text x="155" y="203" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">Hiring &amp; managing engineers</text>
+        <rect x="20" y="228" width="270" height="44" rx="8" fill="#7c6aef" opacity="0.12" stroke="#7c6aef" stroke-width="0.5" opacity="0.3"/>
+        <text x="155" y="255" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#b0a4f8">Sprint planning &amp; velocity</text>
+
+        <!-- Arrow -->
+        <path d="M305 175 L325 175" stroke="#5a576a" stroke-width="2"/>
+        <path d="M320,170 L326,175 L320,180" stroke="#5a576a" stroke-width="2" fill="none"/>
+
+        <!-- Right: 2026 -->
+        <text x="465" y="58" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#4ade80" letter-spacing="0.06em">2026</text>
+        <rect x="330" y="72" width="270" height="44" rx="8" fill="#4ade80" opacity="0.12" stroke="#4ade80" stroke-width="0.5" opacity="0.3"/>
+        <text x="465" y="99" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#4ade80">Context architecture</text>
+        <rect x="330" y="124" width="270" height="44" rx="8" fill="#4ade80" opacity="0.12" stroke="#4ade80" stroke-width="0.5" opacity="0.3"/>
+        <text x="465" y="151" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#4ade80">Agent governance &amp; quality gates</text>
+        <rect x="330" y="176" width="270" height="44" rx="8" fill="#4ade80" opacity="0.12" stroke="#4ade80" stroke-width="0.5" opacity="0.3"/>
+        <text x="465" y="203" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#4ade80">Decision quality &amp; alignment</text>
+        <rect x="330" y="228" width="270" height="44" rx="8" fill="#4ade80" opacity="0.12" stroke="#4ade80" stroke-width="0.5" opacity="0.3"/>
+        <text x="465" y="255" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#4ade80">Talent pipeline &amp; team evolution</text>
+
+        <!-- Bottom -->
+        <text x="310" y="305" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#e8e6f0">The job moved from building systems to building the <tspan font-weight="500">environment</tspan> where systems get built.</text>
+      </svg>
+      <div class="diagram-caption">The CTO's focus shifted from hands-on engineering to orchestration</div>
+    </div>
+
+    <h3 id="context-architect">You're now the context architect<a href="#context-architect" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      At a small company, the CTO often holds the whole system in their head. The architecture, the edge cases, the business rules that never got documented. That worked when you were the one writing the code. It fails completely when AI agents are writing the code — because <strong>agents can't read your mind</strong>.
+    </p>
+
+    <p>
+      The knowledge that lived in your head now needs to live in CLAUDE.md files, architecture docs, agent configs, and rule sets. Your job is making organizational context <em>machine-readable</em>. Every undocumented decision, every implicit convention, every "we never do it that way" — if it's not written down where agents can see it, it doesn't exist. This is context engineering at the org level, not the prompt level.
+    </p>
+
+    <h3 id="quality-gatekeeper">You're the quality gatekeeper, not the output maximizer<a href="#quality-gatekeeper" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      The natural instinct when you get AI agents is to maximize throughput. Ship more. Ship faster. The data says that's a trap.
+    </p>
+
+    <p>
+      <a href="https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report">CodeRabbit's analysis</a> of 470 open-source pull requests found that AI-generated code creates <strong>1.7x more issues</strong> than human code — more logic errors, more security findings, more maintenance problems. Across the industry, PRs per author are up 20% year-over-year, but incidents per PR are <a href="https://blog.exceeds.ai/industry-benchmarks-ai-code-productivity/">up 23.5%</a>. Teams with high AI adoption see 9.5% of their PRs classified as bug fixes, compared to 7.5% at low-adoption teams.
+    </p>
+
+    <p>
+      <strong>Your job isn't to maximize AI output. It's to find the ratio where quality holds.</strong> The current research puts the sustainable range at 25-40% AI-generated code. Above that, rework jumps to 20-30% and technical debt builds faster than you can pay it down. The CTO who brags about AI writing 80% of their code is the same CTO who'll be fighting fires all next quarter.
+    </p>
+
+    <h3 id="accountability">You own the accountability<a href="#accountability" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      When an AI agent ships a bug, who's responsible? At a large company, this is a governance framework question. At a small company, the answer is simple: it's you. The CTO.
+    </p>
+
+    <p>
+      <a href="https://hbr.org/2026/03/to-scale-ai-agents-successfully-think-of-them-like-team-members">HBR argued</a> that every AI agent needs a "job description" — a defined scope of authority, approved sources of truth, clear escalation rules, and audit trails. At Atlassian scale, that means governance infrastructure. At your scale, it means you're personally reviewing the blast radius of every agent session. What can it access? What can it change? What happens if it gets it wrong?
+    </p>
+
+    <p>
+      This isn't theoretical. I covered how <a href="/blog/from-vibe-coding-to-agentic-engineering">Replit's agent wiped a production database</a> during a code freeze. The pattern is always the same: the agent had more access than the task required. At a small company, one bad agent session can take down the whole product. <strong>The CTO's job is making sure the blast radius of any single agent action stays survivable.</strong>
+    </p>
+
+    <h2 id="talent-cliff">The talent cliff nobody's talking about<a href="#talent-cliff" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      <a href="https://hakia.com/news/junior-developer-crisis-2026/">Entry-level developer job postings dropped 67%</a> between 2022 and 2026. The logic is easy to follow: if AI agents can do junior-level work, why hire juniors?
+    </p>
+
+    <p>
+      AWS CEO Matt Garman called this <a href="https://fortune.com/2025/12/16/aws-ceo-matt-garman-ai-displacing-junior-employees-dumbest-idea-amazon-layoffs/">"one of the dumbest things I've ever heard."</a> His point: without a talent pipeline, "at some point that whole thing explodes on itself." You need to teach people how software works. You need junior engineers who grow into senior engineers. If every company stops hiring juniors now, the pool of experienced engineers dries up in five to seven years.
+    </p>
+
+    <p>
+      Yegge describes what he calls the <a href="https://newsletter.pragmaticengineer.com/p/steve-yegge-on-ai-agents-and-the">"Dracula Effect"</a>: AI automates the easy tasks, leaving only the hard thinking. But the easy tasks were exactly how juniors learned. Fix a bug. Add a simple feature. Write a test. That entry ramp is disappearing. <strong>The tasks we used to give new engineers are now the tasks AI agents do best.</strong>
+    </p>
+
+    <p>
+      At a startup, you can't hire juniors just to fill a pipeline. You don't have that luxury. But here's the problem: if every small company stops hiring juniors, the entire industry's senior talent pool stops growing. The CTO who only hires seniors today is borrowing from a pool that nobody is filling.
+    </p>
+
+    <p>
+      This is a collective action problem. But there's a selfish reason to care: the CTO who figures out how to develop juniors <em>with</em> AI agents — not <em>instead of</em> them — gets a real talent advantage. Junior engineers who learn to orchestrate AI agents from day one will be the most valuable senior engineers in five years. They'll understand both the human and AI sides of the system. <strong>That's a hire nobody else is making right now.</strong>
+    </p>
+
+    <h2 id="the-paradox">The paradox: more accessible, more essential<a href="#the-paradox" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      At the individual level — yes, everyone's a CTO now. A domain expert with Claude Code can orchestrate AI agents to build, test, and ship a product. No team needed. No funding needed. Your competitors now include solo founders who never managed an engineer in their life.
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 620 360" fill="none" xmlns="http://www.w3.org/2000/svg" width="620">
+        <text x="310" y="24" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#8b889a" letter-spacing="0.08em">THE DEMOCRATIZATION PARADOX</text>
+
+        <!-- Left: Individual -->
+        <text x="155" y="62" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="15" fill="#e2b340" font-weight="500">Individual</text>
+
+        <!-- Person icon -->
+        <circle cx="155" cy="100" r="14" fill="none" stroke="#e2b340" stroke-width="1.5"/>
+        <line x1="155" y1="114" x2="155" y2="145" stroke="#e2b340" stroke-width="1.5"/>
+
+        <!-- Fan out to agents -->
+        <line x1="155" y1="145" x2="75" y2="185" stroke="#e2b340" stroke-width="1" opacity="0.5"/>
+        <line x1="155" y1="145" x2="115" y2="185" stroke="#e2b340" stroke-width="1" opacity="0.5"/>
+        <line x1="155" y1="145" x2="155" y2="185" stroke="#e2b340" stroke-width="1" opacity="0.5"/>
+        <line x1="155" y1="145" x2="195" y2="185" stroke="#e2b340" stroke-width="1" opacity="0.5"/>
+        <line x1="155" y1="145" x2="235" y2="185" stroke="#e2b340" stroke-width="1" opacity="0.5"/>
+
+        <rect x="57" y="185" width="36" height="22" rx="5" fill="#e2b340" opacity="0.15" stroke="#e2b340" stroke-width="0.5" opacity="0.4"/>
+        <text x="75" y="200" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#e2b340">AI</text>
+        <rect x="97" y="185" width="36" height="22" rx="5" fill="#e2b340" opacity="0.15" stroke="#e2b340" stroke-width="0.5" opacity="0.4"/>
+        <text x="115" y="200" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#e2b340">AI</text>
+        <rect x="137" y="185" width="36" height="22" rx="5" fill="#e2b340" opacity="0.15" stroke="#e2b340" stroke-width="0.5" opacity="0.4"/>
+        <text x="155" y="200" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#e2b340">AI</text>
+        <rect x="177" y="185" width="36" height="22" rx="5" fill="#e2b340" opacity="0.15" stroke="#e2b340" stroke-width="0.5" opacity="0.4"/>
+        <text x="195" y="200" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#e2b340">AI</text>
+        <rect x="217" y="185" width="36" height="22" rx="5" fill="#e2b340" opacity="0.15" stroke="#e2b340" stroke-width="0.5" opacity="0.4"/>
+        <text x="235" y="200" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#e2b340">AI</text>
+
+        <text x="155" y="232" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#5a576a">1 person = mini CTO</text>
+        <text x="155" y="248" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#5a576a">5 agents, full product</text>
+
+        <!-- Divider -->
+        <line x1="310" y1="50" x2="310" y2="270" stroke="#2e2e42" stroke-width="1" stroke-dasharray="4,4"/>
+
+        <!-- Right: Organization -->
+        <text x="465" y="62" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="15" fill="#7c6aef" font-weight="500">Organization</text>
+
+        <!-- CTO icon -->
+        <circle cx="465" cy="95" r="14" fill="none" stroke="#7c6aef" stroke-width="1.5"/>
+        <text x="465" y="92" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#7c6aef">CTO</text>
+        <line x1="465" y1="109" x2="465" y2="130" stroke="#7c6aef" stroke-width="1.5"/>
+
+        <!-- Fan out to engineers -->
+        <line x1="465" y1="130" x2="385" y2="158" stroke="#7c6aef" stroke-width="1" opacity="0.5"/>
+        <line x1="465" y1="130" x2="425" y2="158" stroke="#7c6aef" stroke-width="1" opacity="0.5"/>
+        <line x1="465" y1="130" x2="465" y2="158" stroke="#7c6aef" stroke-width="1" opacity="0.5"/>
+        <line x1="465" y1="130" x2="505" y2="158" stroke="#7c6aef" stroke-width="1" opacity="0.5"/>
+        <line x1="465" y1="130" x2="545" y2="158" stroke="#7c6aef" stroke-width="1" opacity="0.5"/>
+
+        <!-- Engineers -->
+        <circle cx="385" cy="168" r="9" fill="none" stroke="#b0a4f8" stroke-width="1.5"/>
+        <circle cx="425" cy="168" r="9" fill="none" stroke="#b0a4f8" stroke-width="1.5"/>
+        <circle cx="465" cy="168" r="9" fill="none" stroke="#b0a4f8" stroke-width="1.5"/>
+        <circle cx="505" cy="168" r="9" fill="none" stroke="#b0a4f8" stroke-width="1.5"/>
+        <circle cx="545" cy="168" r="9" fill="none" stroke="#b0a4f8" stroke-width="1.5"/>
+
+        <!-- Each engineer fans to agents -->
+        <line x1="385" y1="177" x2="370" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="385" y1="177" x2="385" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="385" y1="177" x2="400" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+
+        <line x1="425" y1="177" x2="410" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="425" y1="177" x2="425" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="425" y1="177" x2="440" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+
+        <line x1="465" y1="177" x2="450" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="465" y1="177" x2="465" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="465" y1="177" x2="480" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+
+        <line x1="505" y1="177" x2="490" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="505" y1="177" x2="505" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="505" y1="177" x2="520" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+
+        <line x1="545" y1="177" x2="530" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="545" y1="177" x2="545" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+        <line x1="545" y1="177" x2="560" y2="205" stroke="#e2b340" stroke-width="0.8" opacity="0.4"/>
+
+        <!-- Agent dots -->
+        <circle cx="370" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="385" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="400" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="410" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="425" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="440" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="450" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="465" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="480" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="490" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="505" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="520" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="530" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="545" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+        <circle cx="560" cy="212" r="5" fill="#e2b340" opacity="0.3"/>
+
+        <text x="465" y="242" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#5a576a">5 humans &times; 3 agents each</text>
+        <text x="465" y="258" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#5a576a">= 15 &ldquo;workers&rdquo;, 5 reviewers</text>
+
+        <!-- Bottom labels -->
+        <text x="155" y="288" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" fill="#e2b340">Simpler. One person decides.</text>
+        <text x="465" y="288" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" fill="#b0a4f8">Harder. Coordination explodes.</text>
+
+        <text x="310" y="332" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#e8e6f0">The CTO <tspan font-weight="500">function</tspan> got easier. The CTO <tspan font-weight="500">role</tspan> got harder.</text>
+      </svg>
+      <div class="diagram-caption">Same AI agents, different coordination problems</div>
+    </div>
+
+    <p>
+      At the organizational level, the CTO role got harder, not easier. Managing five engineers was one thing. Managing five engineers each running three to five AI agent sessions is a different category of problem. That's 15 to 25 "workers" producing code, with only five humans actually understanding what was built. The review bottleneck, the quality problem, the architectural coherence — they all got worse.
+    </p>
+
+    <p>
+      Atlassian's answer was to split the role: one CTO for AI product, one for enterprise trust. You can't do that at a 20-person company. You can't split yourself. Instead, you invest in the <em>systems</em> that scale your judgment: architecture docs the agents can read, CI pipelines that catch what humans miss, team conventions that agents enforce automatically. You make the environment smart so you don't have to review everything personally.
+    </p>
+
+    <blockquote>
+      <p>You're not the best engineer anymore. You're the person who makes the entire human + AI system produce reliable software that serves the business.</p>
+    </blockquote>
+
+    <hr>
+
+    <p>
+      The CTO didn't become obsolete. The job split. Everyone got the small version — one person orchestrating a few AI agents, building products that would have needed a team a year ago. That's real. That's happening. And it's great.
+    </p>
+
+    <p>
+      But at the organizational level, the big version of the job got harder. More output to govern. More quality risks to manage. A talent pipeline that's drying up. New accountability questions that nobody has good answers to yet.
+    </p>
+
+    <p>
+      <strong>The CTO who thrives in this world is the one who stops trying to be the best engineer in the room — and starts being the person who makes the room work.</strong>
+    </p>

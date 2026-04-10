@@ -16,6 +16,13 @@
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
+  document.querySelectorAll('.article-body a[href^="http"]').forEach(function(link) {
+    if (!link.getAttribute('target')) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener');
+    }
+  });
+
   document.querySelectorAll('.article-body h2[id], .article-body h3[id]').forEach(function(heading) {
     heading.addEventListener('click', function(e) {
       if (e.target.closest('.anchor-icon')) return;
