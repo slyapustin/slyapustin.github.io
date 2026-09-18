@@ -3,7 +3,7 @@
 ## Important
 - This is a PUBLIC repository. Never commit secrets, credentials, or sensitive information.
 - Deployed via GitHub Pages to slyapustin.com (Jekyll 3.10, auto-built on push)
-- Git remote uses SSH: git@github.com:Slyapustin/slyapustin.github.io.git
+- Git remote uses SSH: git@github.com:slyapustin/slyapustin.github.io.git
 
 ## Local Development
 ```
