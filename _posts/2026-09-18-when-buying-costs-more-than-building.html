@@ -1,0 +1,260 @@
+---
+layout: post
+title: "When Buying Costs More Than Building: Which SaaS Survives the Agent Era"
+title_html: "When Buying Costs More Than <em>Building</em>"
+date: 2026-09-18
+description: "Pieter Levels cut $25,000/mo by replacing 14 SaaS tools with vibe coded services. The interesting part isn't what he replaced. It's the six things he kept, and what that tells every SaaS business about the three ways it can now die."
+og_image: /blog/og-when-buying-costs-more.jpg
+preload_image: /blog/build-vs-buy-fork.webp
+tags: [Strategy, SaaS, AI Engineering, MCP, Agentic]
+read_time: 9
+card_title: "When Buying Costs More Than Building"
+card_excerpt: "Every SaaS tool now competes against an afternoon with an agent. Three ways yours can die, and why survival looks like a smaller product an agent can drive."
+has_diagrams: true
+related:
+  - when-building-is-the-easy-part
+  - when-everyone-has-a-dev-team
+  - from-vibe-coding-to-agentic-engineering
+---
+
+    <div style="margin:0 0 1.75rem;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+      <picture>
+        <source srcset="/blog/build-vs-buy-fork.webp" type="image/webp">
+        <img src="/blog/build-vs-buy-fork.jpg" alt="Cartoon illustration of a fork in the road. A signpost points left to BUY, toward a grey mountain of unpaid invoices under storm clouds, and right to BUILD, toward a sunlit path. A small robot carrying a toolbox walks the BUILD path toward a cheerful handmade house, which sits on a massive industrial concrete foundation with thick power cables running from it to a distant plant on the horizon" width="1440" height="757" style="width:100%;height:auto;display:block;" fetchpriority="high">
+      </picture>
+    </div>
+
+    <p class="diagram-caption">
+      The robot built the house. Note who still built the foundation.
+    </p>
+
+    <p>
+      Last week Pieter Levels <a href="https://x.com/levelsio/status/2097692685775565031">posted a list</a> of fourteen SaaS services he'd replaced with software he built himself. Weather APIs, image resizing, NSFW detection, video streaming, screenshot generation, error monitoring, uptime checks, maps, scraping, his blog platform, his photo editor. Human moderators replaced by a model. Most of tier-one support replaced by a bot. Total: roughly <strong>$25,000 a month</strong>, gone. He has since written up <a href="https://levels.io/replaced-saas-with-vibe-coded-services">the full breakdown</a>, service by service. The post did half a million views in a few days, which tells you it landed on a nerve.
+    </p>
+
+    <div style="margin:1.5rem auto;max-width:560px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+      <picture>
+        <source srcset="/blog/levelsio-saas-tweet.webp" type="image/webp">
+        <img src="/blog/levelsio-saas-tweet.jpg" alt="Screenshot of a post by levelsio listing fourteen SaaS services replaced with his own vibe coded software for around $25,000 a month in savings, followed by the six services he chose to keep: Cloudflare domains, Cloudflare email sending, Cloudflare R2 storage, Backblaze B2 for backups, Hetzner for servers and xAI for models" width="1132" height="1760" style="width:100%;height:auto;display:block;" loading="lazy">
+      </picture>
+    </div>
+
+    <p class="diagram-caption">
+      The original post, 9 September 2026. <a href="https://x.com/levelsio/status/2097692685775565031">Source</a>
+    </p>
+
+    <p>
+      The obvious reading is the triumphant one: AI killed SaaS, build everything yourself, cancel your subscriptions. That reading is wrong, and the evidence is in the same post. Because he also listed what he <em>kept</em>: Cloudflare for domains, email and R2, Backblaze B2, Hetzner for servers, and a frontier lab for the models. Six services he had no interest in rebuilding, sitting right next to fourteen he killed without much ceremony.
+    </p>
+
+    <p>
+      That split is the actual story. Something now separates software you pay for from software you replace on a Saturday, and it isn't category, price tier, or quality. <strong>It's a threshold, and the threshold moved.</strong>
+    </p>
+
+    <h2 id="not-anecdote">This isn't one guy with unusual habits<a href="#not-anecdote" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      It's easy to dismiss a solo founder running lean as an outlier. He isn't one, he's just early and loud about it. The tools that lose this argument are consistent: workflow automation, internal admin panels, dashboards, form builders. Anything where a company touches maybe 20% of the feature surface and pays per seat as though it used all of it. That was a perfectly good business model when rebuilding the 20% cost six engineer-months.
+    </p>
+
+    <h2 id="three-gates">Three ways a SaaS product dies<a href="#three-gates" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Every tool your company pays for is now being quietly evaluated against a new alternative: an afternoon with a coding agent. It has to clear three gates to survive that comparison, and failing any one of them is fatal.
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 620 386" fill="none" xmlns="http://www.w3.org/2000/svg" width="620">
+        <text x="310" y="22" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#8b889a" letter-spacing="0.08em">THE THREE GATES</text>
+
+        <rect x="20" y="44" width="580" height="72" rx="8" fill="#15151f" stroke="#2e2e42" stroke-width="1"/>
+        <text x="44" y="72" font-family="ui-monospace,monospace" font-size="12" fill="#b0a4f8">GATE 1</text>
+        <text x="112" y="72" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#e8e6f0" font-weight="500">Can an agent drive it?</text>
+        <text x="112" y="96" font-family="-apple-system,system-ui,sans-serif" font-size="12.5" fill="#8b889a">No MCP server, no clean API, docs written for humans clicking buttons</text>
+
+        <path d="M310 116 L310 136" stroke="#5a576a" stroke-width="1"/>
+        <path d="M306 131 L310 137 L314 131" stroke="#5a576a" stroke-width="1"/>
+
+        <rect x="20" y="140" width="580" height="72" rx="8" fill="#15151f" stroke="#2e2e42" stroke-width="1"/>
+        <text x="44" y="168" font-family="ui-monospace,monospace" font-size="12" fill="#b0a4f8">GATE 2</text>
+        <text x="112" y="168" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#e8e6f0" font-weight="500">Is it faster to learn than to rebuild?</text>
+        <text x="112" y="192" font-family="-apple-system,system-ui,sans-serif" font-size="12.5" fill="#8b889a">Documentation, configuration, and a partial fit at the end of it</text>
+
+        <path d="M310 212 L310 232" stroke="#5a576a" stroke-width="1"/>
+        <path d="M306 227 L310 233 L314 227" stroke="#5a576a" stroke-width="1"/>
+
+        <rect x="20" y="236" width="580" height="72" rx="8" fill="#15151f" stroke="#2e2e42" stroke-width="1"/>
+        <text x="44" y="264" font-family="ui-monospace,monospace" font-size="12" fill="#b0a4f8">GATE 3</text>
+        <text x="112" y="264" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#e8e6f0" font-weight="500">Is it cheaper than owning it?</text>
+        <text x="112" y="288" font-family="-apple-system,system-ui,sans-serif" font-size="12.5" fill="#8b889a">Price measured against build plus maintenance, not against competitors</text>
+
+        <path d="M310 308 L310 328" stroke="#5a576a" stroke-width="1"/>
+        <path d="M306 323 L310 329 L314 323" stroke="#5a576a" stroke-width="1"/>
+
+        <rect x="140" y="332" width="340" height="44" rx="8" fill="#15151f" stroke="#4a3d8f" stroke-width="1"/>
+        <text x="310" y="359" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13.5" fill="#4ade80" font-weight="500">Clears all three, and only then, you keep paying</text>
+      </svg>
+      <div class="diagram-caption">Fail any one gate and the rebuild starts looking reasonable.</div>
+    </div>
+
+    <h3 id="gate-one">Gate one: legibility to agents<a href="#gate-one" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      Work is moving into the agent loop. If your product can't be reached from inside that loop (no MCP server, no coherent API, authentication that assumes a browser session and a human clicking "Approve"), then you are outside the place where the work now happens. MCP went from a launch announcement in late 2024 to something every serious tool now ships support for, and it got there in about eighteen months. It has stopped being an early-adopter curiosity and started being plumbing.
+    </p>
+
+    <p>
+      Being unreachable from an agent used to be a minor integration gap. Now it's an existential one, because nobody integrates manually any more. They ask the agent to build the part they need, which it can reach by definition.
+    </p>
+
+    <h3 id="gate-two">Gate two: the comprehension tax<a href="#gate-two" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      This is the one most founders still misread. For twenty years, complexity was a moat. Deep configuration, a certification program, a partner ecosystem, an implementation consultant: all of it made you harder to leave. Switching costs were the business model.
+    </p>
+
+    <p>
+      That logic inverts the moment rebuilding is cheap. If it takes me three days to understand your permissions model and two hours to have an agent build the slice of it I actually use, <strong>your depth stopped being a moat and became an eviction notice.</strong> Complexity is no longer a cost of leaving. It's a cost of staying, paid up front, and it is now directly comparable against a build estimate.
+    </p>
+
+    <p>
+      And the two paths don't even end in the same place. Reading the documentation is not a shortcut to what you wanted. It's a negotiation with what the vendor decided to support. You spend an afternoon in configuration screens, you learn which of your requirements the product has opinions about, you give up on two of them, you find a workaround for a third, and you arrive at something that partially does the job. Building takes about the same afternoon and arrives at the thing you actually described, because the requirement was the input rather than something to be bargained down.
+    </p>
+
+    <p>
+      Put those side by side and the subscription looks strange. <strong>You are paying every month for the compromise.</strong> Not for the software, for the gap between what you needed and what the product was willing to do, maintained in perpetuity, with a price increase every renewal.
+    </p>
+
+    <h3 id="gate-three">Gate three: price against the rebuild, not the market<a href="#gate-three" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h3>
+
+    <p>
+      Pricing pages are still written as though the competition is the other vendor in the category. It isn't. The real comparison is against an afternoon of agent time plus whatever the maintenance turns out to cost. When a $250/mo screenshot API meets a service that took two hours to write and costs nothing to run, the $250 isn't expensive relative to competitors, it's expensive relative to <em>zero</em>, and that's the number it's being judged against.
+    </p>
+
+    <p>
+      Every line item on Levels' list was individually defensible. Two hundred and fifty dollars here, five hundred there. Collectively they were $25,000/mo, and each one failed the same comparison independently.
+    </p>
+
+    <h2 id="what-survives">What survived, and why<a href="#what-survives" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Look at the six he kept and a pattern appears immediately.
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 620 330" fill="none" xmlns="http://www.w3.org/2000/svg" width="620">
+        <text x="160" y="22" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#e2b340" letter-spacing="0.08em">REPLACED</text>
+        <text x="450" y="22" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#4ade80" letter-spacing="0.08em">KEPT</text>
+
+        <rect x="20" y="36" width="280" height="272" rx="8" fill="#15151f" stroke="#2e2e42" stroke-width="1"/>
+        <rect x="320" y="36" width="280" height="272" rx="8" fill="#15151f" stroke="#4a3d8f" stroke-width="1"/>
+
+        <text x="44" y="64" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Weather API</text>
+        <text x="44" y="88" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Image resizing</text>
+        <text x="44" y="112" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">NSFW detection</text>
+        <text x="44" y="136" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Video streaming</text>
+        <text x="44" y="160" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Screenshots</text>
+        <text x="44" y="184" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Error monitoring</text>
+        <text x="44" y="208" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Moderation</text>
+        <text x="44" y="232" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Maps, uptime, scraping</text>
+        <text x="44" y="256" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Blog, photo editor</text>
+        <text x="44" y="288" font-family="ui-monospace,monospace" font-size="12" fill="#8b889a">Application layer</text>
+
+        <text x="344" y="64" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Cloudflare Domains</text>
+        <text x="344" y="88" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Cloudflare Email</text>
+        <text x="344" y="112" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Cloudflare R2</text>
+        <text x="344" y="136" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Backblaze B2</text>
+        <text x="344" y="160" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Hetzner VPS</text>
+        <text x="344" y="184" font-family="ui-monospace,monospace" font-size="12.5" fill="#e8e6f0">Frontier model API</text>
+        <text x="344" y="288" font-family="ui-monospace,monospace" font-size="12" fill="#8b889a">Infrastructure layer</text>
+
+        <line x1="344" y1="208" x2="576" y2="208" stroke="#2e2e42" stroke-width="1"/>
+        <text x="344" y="234" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#b0a4f8">Physics, liability, scale</text>
+        <text x="344" y="254" font-family="-apple-system,system-ui,sans-serif" font-size="12" fill="#b0a4f8">or capital you can't fake</text>
+      </svg>
+      <div class="diagram-caption">$25,000/mo of application layer, cut. The infrastructure layer, untouched.</div>
+    </div>
+
+    <p>
+      Everything that survived has at least one of three properties, and none of them are features:
+    </p>
+
+    <p>
+      <strong>1. There's physics underneath.</strong> Hetzner has data centres. Cloudflare has an anycast network and IP reputation built over fifteen years. R2 and B2 have spinning disks in buildings. You cannot vibe code a data centre, and an agent that writes perfect code still can't write you an AS number with a clean sending history.
+    </p>
+
+    <p>
+      <strong>2. Someone else carries the liability.</strong> Payments, payroll, identity, compliance. You are buying the indemnity, not the software. Nobody rebuilds Stripe to save a fee; they'd be rebuilding the regulatory posture, and that isn't code.
+    </p>
+
+    <p>
+      <strong>3. The data or the network can't be instantiated alone.</strong> A frontier model API is the clearest case: the weights represent capital expenditure at a scale that makes "build it yourself" a category error rather than a trade-off.
+    </p>
+
+    <h2 id="the-bill">The bill doesn't disappear, it changes form<a href="#the-bill" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Here's where I'd push back on the triumphant version of this story, and Levels himself has made the same point elsewhere: building is the easy part, scaling is where it gets hard. Cancelling fourteen subscriptions doesn't leave you with $25,000. It leaves you with $25,000 minus fourteen new on-call surfaces.
+    </p>
+
+    <p>
+      The custom NSFW detector has a false-negative rate that is now your legal problem. The self-hosted video streaming has an outage profile that is now your weekend. The scraper breaks when the target site ships a new layout, and it will, and nobody sends you a changelog. Every vendor you fire hands you back their roadmap, their pager, and their edge cases, and an agent that wrote the code in two hours will not notice the day it starts silently failing.
+    </p>
+
+    <blockquote>
+      <p>The build-versus-buy decision was never really about cost. It's about which maintenance you want to own.</p>
+    </blockquote>
+
+    <p>
+      That reframing is what makes this tractable. A one-person business can absorb fourteen small maintenance surfaces because the founder is the whole feedback loop and notices when something breaks. A fifty-person company replacing its CRM with an internal build is making a very different bet: the tool outlives the person who built it, and the honest cost is whoever maintains it in year three, not the afternoon it took to ship.
+    </p>
+
+    <p>
+      So the threshold is real, but it's personal. It sits at a different place for a solo founder than for a mid-size company, and the mistake I see most often right now is teams reading a viral post written from one side of that line and applying it from the other.
+    </p>
+
+    <h2 id="if-you-sell">If you sell software, this is your product roadmap<a href="#if-you-sell" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Five things follow directly from the three gates, and every one of them is shippable this quarter:
+    </p>
+
+    <p>
+      <strong>Cut surface area instead of adding it.</strong> The reflex when a competitor ships something is to ship it too, and products accumulate screens the way a garage accumulates boxes. Every screen a customer has to understand before they get value is a charge on the comprehension tax, and they are now weighing that charge against an agent that will build them the one screen they actually wanted and nothing else. For most products the roadmap that keeps them alive is mostly subtraction: fewer settings, fewer concepts, fewer things a person has to learn before the software does the job they came for. A bloated product used to look like a rich one. Now it looks like a rebuild brief.
+    </p>
+
+    <p>
+      <strong>Ship an MCP server, and treat it as a tier-one surface.</strong> Not a side project maintained by one enthusiast. The agent is now a user of your product, and in a growing number of accounts it is the only user who touches it daily. If it can't authenticate, discover your tools, and finish a real task without a human in the browser, you are invisible exactly where the buying decision gets made. Any capability that exists only in your interface is, from that agent's point of view, a capability that does not exist.
+    </p>
+
+    <p>
+      <strong>Measure time to first real outcome, in minutes.</strong> Not signup-to-dashboard. Signup to the thing the customer actually came for. That number is now in direct competition with a build estimate, and every configuration screen between the two is a payment on the comprehension tax.
+    </p>
+
+    <p>
+      <strong>Price against the rebuild, not the category.</strong> Find the part of your product that's genuinely hard (the thing with physics, liability, data or scale behind it) and make sure that's what the price is attached to. If your revenue is concentrated on the easy 20% that a competent agent reproduces in an afternoon, that revenue has a clock on it regardless of how good the product is.
+    </p>
+
+    <p>
+      <strong>Decide, deliberately, whether you're interface or substrate.</strong> Interfaces get replaced. Substrate gets built on. Most SaaS companies are currently interfaces that would rather not think about it, and the transition is a strategy decision with a shelf life, not a design refresh.
+    </p>
+
+    <h2 id="closing">The threshold moved, not the logic<a href="#closing" class="anchor-icon" aria-label="Link to section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a></h2>
+
+    <p>
+      Nobody ever bought software because they loved paying for it. They bought it because building was expensive, and the subscription was cheaper than the engineering. That calculation hasn't changed. One of its inputs collapsed.
+    </p>
+
+    <p>
+      What's left of SaaS is everything that was never really about the software: the network you can't recreate, the liability you don't want, the hardware you'd have to buy, the scale you can't reach alone. That's a smaller business than the industry currently prices itself at, and a much more durable one.
+    </p>
+
+    <p>
+      If you build one of these products, the survival move is not a bigger feature set. It is a smaller one an agent can drive. Make the thing simple enough that rebuilding it feels like pointless work, and reachable enough that your customer's agent picks you up instead of routing around you. Do both and you stop competing against an afternoon of agent time. Do neither and you are quietly financing your own replacement, one screen at a time.
+    </p>
+
+    <hr>
+
+    <p>
+      A useful exercise, and it takes twenty minutes: open your company's subscription list and run each line through the three gates. Can an agent drive it? Is it faster to learn than to rebuild? Is it cheaper than owning it? Most tools clear all three and you'll close the spreadsheet reassured. The few that don't are the ones someone on your team is already quietly rebuilding. And if you sell software, that same list is being run against you right now by somebody who hasn't told you yet.
+    </p>
