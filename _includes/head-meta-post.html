@@ -5,7 +5,10 @@
 <meta property="article:published_time" content="{{ page.date | date: '%Y-%m-%d' }}">
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:description" content="{{ page.description }}">
-{% if page.og_image %}<meta property="og:image" content="{{ page.og_image | absolute_url }}">{% endif %}
+{% if page.og_image %}<meta property="og:image" content="{{ page.og_image | absolute_url }}">
+<meta property="og:image:alt" content="{{ page.og_image_alt | default: page.title }}">{% endif %}
+{% if page.og_image_width %}<meta property="og:image:width" content="{{ page.og_image_width }}">
+<meta property="og:image:height" content="{{ page.og_image_height }}">{% endif %}
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:title" content="{{ page.title }}">
