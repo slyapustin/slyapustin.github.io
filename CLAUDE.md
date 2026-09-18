@@ -7,7 +7,7 @@
 
 ## Local Development
 ```
-export PATH="/usr/local/opt/ruby@3.3/bin:/usr/local/lib/ruby/gems/3.3.0/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH"
 bundle exec jekyll serve --port 4001
 ```
 Site runs at http://localhost:4001. Uses Ruby 3.3 + `github-pages` gem (Jekyll 3.10).
@@ -67,7 +67,7 @@ Optional: `preload_image: /blog/image.webp` for LCP optimization.
 - Lighthouse audit must score 100 on SEO, Accessibility, Best Practices
 - SVG diagrams must work in light mode (shared overrides in `_includes/css/diagram.html`)
 - OG image must render in LinkedIn post inspector
-- No em dash replacement in CSS or HTML attributes (only in article body text)
+- No em dashes (—) anywhere: body text, frontmatter, or social copy. Use commas, colons, parentheses, or a new sentence
 
 ## Design
 - Apple system fonts (-apple-system, SF Pro) — no Google Fonts
